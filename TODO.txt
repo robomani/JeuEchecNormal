@@ -43,3 +43,6 @@ Class Reine
 Class Fou
 
 Class Chevalier
+
+//Liens vers la doc
+http://lazyfoo.net/tutorials/SDL/02_getting_an_image_on_the_screen/index.php

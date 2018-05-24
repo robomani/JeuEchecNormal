@@ -8,11 +8,17 @@ int main(int argc, char * argv[])
 	{
 		cout << "SDL initialization failed. SDL Error: " << SDL_GetError();
 	}
-	else
-	{
-		cout << "SDL initialization succeeded!";
-	}
+
+	//The window we'll be rendering to
+	SDL_Window* gWindow = NULL;
+
+	//The surface contained by the window
+	SDL_Surface* gScreenSurface = NULL;
+
+	//The image we will load and show on the screen
+	SDL_Surface* gHelloWorld = NULL;
 
 	cin.get();
+	void close();
 	return 0;
 }
