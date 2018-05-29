@@ -1,0 +1,48 @@
+Class Grid
+Initialise()
+Showgrid()
+GridTiles[]
+
+Class Tile
+int posX
+int posY
+bool occuper
+color color
+
+Class GameManager
+bool turn
+float timePlayer1
+float timePlayer2
+Start()
+Reset()
+Save()
+Load()
+Exporte()
+Replay()
+
+Class Piece
+int posX
+int posY
+Movement()
+Remove()
+Hilight()
+CheckValidMove()
+
+Class Pion
+Promotion()
+
+Class Tour
+bool bouge
+
+Class Roi
+bool bouge
+bool echec
+
+Class Reine
+
+Class Fou
+
+Class Chevalier
+
+//Liens vers la doc
+http://lazyfoo.net/tutorials/SDL/02_getting_an_image_on_the_screen/index.php
