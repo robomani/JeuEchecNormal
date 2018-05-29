@@ -117,7 +117,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasePieces.cpp" />
+    <ClCompile Include="Cavalier.cpp" />
+    <ClCompile Include="Dame.cpp" />
+    <ClCompile Include="Fou.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pion.cpp" />
+    <ClCompile Include="Roi.cpp" />
+    <ClCompile Include="Tour.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BasePieces.h" />
+    <ClInclude Include="Cavalier.h" />
+    <ClInclude Include="Dame.h" />
+    <ClInclude Include="Fou.h" />
+    <ClInclude Include="Pion.h" />
+    <ClInclude Include="Roi.h" />
+    <ClInclude Include="Tour.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

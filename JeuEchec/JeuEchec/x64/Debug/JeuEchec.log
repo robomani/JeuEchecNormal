@@ -1,0 +1,2 @@
+﻿  main.cpp
+d:\users\1810078\desktop\jeuechecnormal\jeuechec\jeuechec\main.cpp(2): fatal error C1083: Impossible d'ouvrir le fichier include : 'SDL.h' : No such file or directory
