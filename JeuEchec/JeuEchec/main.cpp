@@ -25,7 +25,6 @@ int main(int argc, char* args[])
 	{
 		printf("Failed to initialize!\n");
 	}
-
 	else
 	{
 		//Load media
@@ -43,6 +42,8 @@ int main(int argc, char* args[])
 			SDL_Delay(2000);
 		}
 	}
+
+	system("pause");
 
 	//Free resources and close SDL
 	close();
