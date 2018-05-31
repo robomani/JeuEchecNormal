@@ -117,7 +117,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseCase.cpp" />
     <ClCompile Include="BasePieces.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="CaseBlanche.cpp" />
+    <ClCompile Include="CaseNoir.cpp" />
     <ClCompile Include="Cavalier.cpp" />
     <ClCompile Include="Dame.cpp" />
     <ClCompile Include="Fou.cpp" />
@@ -127,7 +131,11 @@
     <ClCompile Include="Tour.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseCase.h" />
     <ClInclude Include="BasePieces.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="CaseBlanche.h" />
+    <ClInclude Include="CaseNoir.h" />
     <ClInclude Include="Cavalier.h" />
     <ClInclude Include="Dame.h" />
     <ClInclude Include="Fou.h" />

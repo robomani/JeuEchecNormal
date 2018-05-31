@@ -4,7 +4,7 @@ class Cavalier :
 	public BasePieces
 {
 public:
-	Cavalier();
+	Cavalier(bool i_Black, int i_PosX, int i_PosY);
 	~Cavalier();
 
 	void Mouvement() override;

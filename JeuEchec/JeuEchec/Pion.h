@@ -4,7 +4,7 @@ class Pion :
 	public BasePieces
 {
 public:
-	Pion();
+	Pion(bool i_Black, int i_PosX, int i_PosY);
 	~Pion();
 
 	void Promotion();

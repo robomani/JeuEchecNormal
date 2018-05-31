@@ -1,17 +1,21 @@
 #pragma once
+#include <SDL.h>
+
 class BasePieces
 {
 public:
 	BasePieces();
 	~BasePieces();
 
-	virtual void VerifMouvLegal();
+	virtual bool VerifMouvLegal();
 	virtual void Mouvement();
-	virtual void Illuminer();
+	//La bool determine si l'on veut que la case soit illuminer
+	virtual void Illuminer(bool i_Voulue);
 	virtual void Detruire();
 
 protected:
 	int m_PosX;
 	int m_PosY;
+	SDL_Surface* m_ImageBase = NULL;
 };
 

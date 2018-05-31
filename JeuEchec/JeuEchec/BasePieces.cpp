@@ -11,18 +11,38 @@ BasePieces::~BasePieces()
 {
 }
 
-void BasePieces::VerifMouvLegal()
+bool BasePieces::VerifMouvLegal()
 {
+	//if (Floor(MousePosition.x/LenghtOfTiles) >= 0 && Floor(MousePosition.x/LenghtOfTiles) <= 7 && Floor(MousePosition.y/LenghtOfTiles) >= 0 && Floor(MousePosition.y/LenghtOfTiles) <= 7)
+	{
+		return true;
+	}
 }
 
 void BasePieces::Mouvement()
 {
+	if (VerifMouvLegal())
+	{
+		//m_PosX = Floor(MousePosition.x / LenghtOfTiles);
+		//m_PosY = loor(MousePosition.y / LenghtOfTiles);
+	}
 }
 
-void BasePieces::Illuminer()
+void BasePieces::Illuminer(bool i_Voulue)
 {
+	if (i_Voulue && VerifMouvLegal())
+	{
+		m_ImageCurrent = m_ImageSelected;
+	}
+	else
+	{
+		m_ImageCurrent = m_ImageBase;
+	}
+
 }
 
 void BasePieces::Detruire()
 {
+	m_PosX = -1;
+	m_PosY = -1;
 }

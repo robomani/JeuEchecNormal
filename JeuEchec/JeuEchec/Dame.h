@@ -4,7 +4,7 @@ class Dame :
 	public BasePieces
 {
 public:
-	Dame();
+	Dame(bool i_Black, int i_PosX, int i_PosY);
 	~Dame();
 
 	void Mouvement() override;
