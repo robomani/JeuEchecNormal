@@ -17,6 +17,7 @@ Board::~Board()
 {
 }
 
+
 void Board::initialisation()
 {
 	for (int i = 0; i < 2; i++)
@@ -50,7 +51,7 @@ void Board::initialisation()
 				m_PiecesEnJeu[i][x] = new Tour(i, x, i * 7);
 				break;
 			default:
-				m_PiecesEnJeu[i][x] = new Pion(i, x-8, i * 7);
+				m_PiecesEnJeu[i][x] = new Pion(i, x-8, (i * 5)+1);
 				break;
 			}
 

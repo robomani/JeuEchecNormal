@@ -26,12 +26,14 @@ void Dame::Mouvement()
 {
 }
 
-void Dame::VerifMouvLegal()
+bool Dame::VerifMouvLegal()
 {
+	return true;
 }
 
-void Dame::Illuminer()
+bool Dame::Illuminer()
 {
+	return true;
 }
 
 void Dame::Detruire()

@@ -29,12 +29,14 @@ void Pion::Mouvement()
 {
 }
 
-void Pion::VerifMouvLegal()
+bool Pion::VerifMouvLegal()
 {
+	return true;
 }
 
-void Pion::Illuminer()
+bool Pion::Illuminer()
 {
+	return true;
 }
 
 void Pion::Detruire()

@@ -26,12 +26,14 @@ void Tour::Mouvement()
 {
 }
 
-void Tour::VerifMouvLegal()
+bool Tour::VerifMouvLegal()
 {
+	return true;
 }
 
-void Tour::Illuminer()
+bool Tour::Illuminer()
 {
+	return true;
 }
 
 void Tour::Detruire()

@@ -30,12 +30,14 @@ void Roi::Mouvement()
 {
 }
 
-void Roi::VerifMouvLegal()
+bool Roi::VerifMouvLegal()
 {
+	return true;
 }
 
-void Roi::Illuminer()
+bool Roi::Illuminer()
 {
+	return true;
 }
 
 void Roi::Detruire()

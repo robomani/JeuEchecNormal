@@ -10,6 +10,7 @@ public:
 	int m_Hauteur;
 	int m_Largeur;
 
+
 	BasePieces* m_PiecesEnJeu[2][16];
 
 	void initialisation();

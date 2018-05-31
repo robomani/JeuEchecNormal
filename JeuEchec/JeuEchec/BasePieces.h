@@ -10,7 +10,7 @@ public:
 	virtual bool VerifMouvLegal();
 	virtual void Mouvement();
 	//La bool determine si l'on veut que la case soit illuminer
-	virtual void Illuminer(bool i_Voulue);
+	virtual bool Illuminer();
 	virtual void Detruire();
 
 protected:

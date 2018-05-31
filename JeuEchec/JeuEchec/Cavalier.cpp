@@ -26,12 +26,14 @@ void Cavalier::Mouvement()
 {
 }
 
-void Cavalier::VerifMouvLegal()
+bool Cavalier::VerifMouvLegal()
 {
+	return true;
 }
 
-void Cavalier::Illuminer()
+bool Cavalier::Illuminer()
 {
+	return true;
 }
 
 void Cavalier::Detruire()

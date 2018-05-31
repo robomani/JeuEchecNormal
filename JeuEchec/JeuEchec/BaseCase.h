@@ -12,6 +12,6 @@ public:
 	SDL_Surface* m_ImageCurrent = NULL;
 
 	//La bool determine si l'on veut que la case soit illuminer
-	virtual void Illuminer(bool i_Voulue);
+	virtual bool Illuminer(bool i_Voulue);
 };
 

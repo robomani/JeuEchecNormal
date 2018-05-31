@@ -26,12 +26,14 @@ void Fou::Mouvement()
 {
 }
 
-void Fou::VerifMouvLegal()
+bool Fou::VerifMouvLegal()
 {
+	return true;
 }
 
-void Fou::Illuminer()
+bool Fou::Illuminer()
 {
+	return true;
 }
 
 void Fou::Detruire()

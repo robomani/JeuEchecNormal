@@ -28,17 +28,9 @@ void BasePieces::Mouvement()
 	}
 }
 
-void BasePieces::Illuminer(bool i_Voulue)
+bool BasePieces::Illuminer()
 {
-	if (i_Voulue && VerifMouvLegal())
-	{
-		m_ImageCurrent = m_ImageSelected;
-	}
-	else
-	{
-		m_ImageCurrent = m_ImageBase;
-	}
-
+	return true;
 }
 
 void BasePieces::Detruire()

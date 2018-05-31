@@ -12,7 +12,7 @@ BaseCase::~BaseCase()
 {
 }
 
-void BaseCase::Illuminer(bool i_Voulue)
+bool BaseCase::Illuminer(bool i_Voulue)
 {
 	if (i_Voulue)
 	{
@@ -22,4 +22,5 @@ void BaseCase::Illuminer(bool i_Voulue)
 	{
 		m_ImageCurrent = m_ImageBase;
 	}
+	return true;
 }

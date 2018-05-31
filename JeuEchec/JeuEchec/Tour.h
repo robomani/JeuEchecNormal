@@ -10,8 +10,8 @@ public:
 	bool Bouger = false;
 
 	void Mouvement() override;
-	void VerifMouvLegal() override;
-	void Illuminer() override;
+	bool VerifMouvLegal() override;
+	bool Illuminer() override;
 	void Detruire() override;
 };
 
