@@ -6,6 +6,7 @@ and may not be redistributed without written permission.*/
 #include <SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 400;
@@ -152,18 +153,44 @@ int main(int argc, char* args[])
 			//Event handler
 			SDL_Event e;
 
+			bool isButtonDown = false;
+			int mousePosX = 0;
+			int mousePosY = 0;
+
 			//While application is running
 			while (!quit)
 			{
 				//Handle events on queue
 				while (SDL_PollEvent(&e) != 0)
 				{
-					//User requests quit
 					if (e.type == SDL_QUIT)
 					{
 						quit = true;
 					}
+					if (e.type == SDL_MOUSEBUTTONDOWN)
+					{
+						isButtonDown = true;
+					}
+					if (e.type == SDL_MOUSEBUTTONUP)
+					{
+						isButtonDown = false;
+					}
+					if (e.type == SDL_MOUSEMOTION)
+					{
+						int x = 0;
+						int y = 0;
+						SDL_GetMouseState(&mousePosX, &mousePosY);
+					}
 				}
+
+				//Show mouse position X and Y
+				std::cout << mousePosX << " =X   " << mousePosY << " =Y " << std::endl;
+				//Show if ButtonDown
+				if (isButtonDown)
+				{
+					std::cout << "True" << std::endl;
+				}
+				
 
 				//Apply the PNG image
 				SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, NULL);
@@ -173,7 +200,6 @@ int main(int argc, char* args[])
 			}
 		}
 	}
-	system("pause");
 	//Free resources and close SDL
 	close();
 
