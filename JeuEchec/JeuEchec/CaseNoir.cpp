@@ -4,8 +4,8 @@
 
 CaseNoir::CaseNoir()
 {
-	m_ImageBase = SDL_LoadBMP("ArtWork/CaseNoirBase.bmp");
-	m_ImageIlluminer = SDL_LoadBMP("ArtWork/CaseNoirIlluminer.bmp");
+	m_ImageBase = loadSurface("ArtWork/CaseNoirBase.bmp");
+	m_ImageIlluminer = loadSurface("ArtWork/CaseNoirIlluminer.bmp");
 	m_ImageCurrent = m_ImageBase;
 }
 
