@@ -6,11 +6,11 @@ Roi::Roi(bool i_Black, int i_PosX, int i_PosY)
 {
 	if (i_Black)
 	{
-		m_ImageBase = loadSurface("ArtWork/RoirNoir.bmp");
+		m_ImageBase = loadSurface("ArtWork/Black_King.png");
 	}
 	else
 	{
-		m_ImageBase = loadSurface("ArtWork/RoiBlanc.bmp");
+		m_ImageBase = loadSurface("ArtWork/White_King.png");
 	}
 
 	m_PosX = i_PosX;

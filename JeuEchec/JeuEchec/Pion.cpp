@@ -6,11 +6,11 @@ Pion::Pion(bool i_Black, int i_PosX, int i_PosY)
 {
 	if (i_Black)
 	{
-		m_ImageBase = loadSurface("ArtWork/PionNoir.bmp");
+		m_ImageBase = loadSurface("ArtWork/Black_Pawn.png");
 	}
 	else
 	{
-		m_ImageBase = loadSurface("ArtWork/PionBlanc.bmp");
+		m_ImageBase = loadSurface("ArtWork/White_Pawn.png");
 	}
 
 	m_PosX = i_PosX;

@@ -7,6 +7,7 @@ and may not be redistributed without written permission.*/
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#include "Board.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 400;
@@ -133,6 +134,8 @@ SDL_Surface* loadSurface(std::string path)
 
 int main(int argc, char* args[])
 {
+	Board m_Board = Board();
+
 	//Start up SDL and create window
 	if (!init())
 	{

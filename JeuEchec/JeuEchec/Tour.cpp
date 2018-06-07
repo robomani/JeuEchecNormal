@@ -6,11 +6,11 @@ Tour::Tour(bool i_Black, int i_PosX, int i_PosY)
 {
 	if (i_Black)
 	{
-		m_ImageBase = loadSurface("ArtWork/TourNoir.bmp");
+		m_ImageBase = loadSurface("ArtWork/Black_Rook.png");
 	}
 	else
 	{
-		m_ImageBase = loadSurface("ArtWork/TourBlanc.bmp");
+		m_ImageBase = loadSurface("ArtWork/White_Rook.png");
 	}
 
 	m_PosX = i_PosX;

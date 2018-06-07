@@ -6,11 +6,11 @@ Fou::Fou(bool i_Black, int i_PosX, int i_PosY)
 {
 	if (i_Black)
 	{
-		m_ImageBase = loadSurface("ArtWork/FouNoir.bmp");
+		m_ImageBase = loadSurface("ArtWork/Black_Bishop.png");
 	}
 	else
 	{
-		m_ImageBase = loadSurface("ArtWork/FouBlanc.bmp");
+		m_ImageBase = loadSurface("ArtWork/White_Bishop.png");
 	}
 
 	m_PosX = i_PosX;

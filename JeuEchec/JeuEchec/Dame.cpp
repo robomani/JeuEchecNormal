@@ -6,11 +6,11 @@ Dame::Dame(bool i_Black, int i_PosX, int i_PosY)
 {
 	if (i_Black)
 	{
-		m_ImageBase = loadSurface("ArtWork/DameNoir.bmp");
+		m_ImageBase = loadSurface("ArtWork/Black_Queen.png");
 	}
 	else
 	{
-		m_ImageBase = loadSurface("ArtWork/DameBlanc.bmp");
+		m_ImageBase = loadSurface("ArtWork/White_Queen.png");
 	}
 
 	m_PosX = i_PosX;
