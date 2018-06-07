@@ -1,5 +1,7 @@
 #pragma once
 #include <SDL.h>
+#include <SDL_image.h>
+#include <string>
 
 class BasePieces
 {
@@ -16,11 +18,13 @@ public:
 	virtual bool Illuminer();
 	virtual void Detruire();
 	bool GetColor();
+	SDL_Surface* loadSurface(std::string path);
 
 protected:
 	bool Noir;
 	int m_PosX;
 	int m_PosY;
 	SDL_Surface* m_ImageBase = NULL;
+	SDL_Rect m_Rect;
 };
 

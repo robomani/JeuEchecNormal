@@ -46,3 +46,8 @@ bool BasePieces::GetColor()
 {
 	return Noir;
 }
+
+SDL_Surface* BasePieces::loadSurface(std::string path)
+{
+	return IMG_Load(path.c_str());
+}
