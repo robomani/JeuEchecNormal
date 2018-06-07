@@ -1,8 +1,10 @@
 #include "BasePieces.h"
+#include <math.h>
 
 
-
-BasePieces::BasePieces()
+BasePieces::BasePieces(int i_PosX, int i_PosY)
+	:m_PosX(i_PosX)
+	,m_PosY(i_PosY)
 {
 }
 
@@ -13,7 +15,8 @@ BasePieces::~BasePieces()
 
 bool BasePieces::VerifMouvLegal()
 {
-	//if (Floor(MousePosition.x/LenghtOfTiles) >= 0 && Floor(MousePosition.x/LenghtOfTiles) <= 7 && Floor(MousePosition.y/LenghtOfTiles) >= 0 && Floor(MousePosition.y/LenghtOfTiles) <= 7)
+	
+	//if (floor(mousePosX/50) >= 0 && Floor(mousePosX/50) <= 7 && Floor(mousePosY/50) >= 0 && Floor(mousePosY/50) <= 7)
 	{
 		return true;
 	}
@@ -21,10 +24,10 @@ bool BasePieces::VerifMouvLegal()
 
 void BasePieces::Mouvement()
 {
-	if (VerifMouvLegal())
+	//if (VerifMouvLegal())
 	{
-		//m_PosX = Floor(MousePosition.x / LenghtOfTiles);
-		//m_PosY = loor(MousePosition.y / LenghtOfTiles);
+		//m_PosX = Floor(mousePosX / LenghtOfTiles);
+		//m_PosY = loor(mousePosY / LenghtOfTiles);
 	}
 }
 
@@ -37,4 +40,9 @@ void BasePieces::Detruire()
 {
 	m_PosX = -1;
 	m_PosY = -1;
+}
+
+bool BasePieces::GetColor()
+{
+	return Noir;
 }

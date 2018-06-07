@@ -1,8 +1,11 @@
 #include "BaseCase.h"
+#include "BasePieces.h"
 
 
-
-BaseCase::BaseCase()
+BaseCase::BaseCase(int i_PosX, int i_PosY, BasePieces* i_Piece = nullptr)
+	: PosX (i_PosX)
+	, PosY (i_PosY)
+	, m_Piece (i_Piece)
 {
 
 }

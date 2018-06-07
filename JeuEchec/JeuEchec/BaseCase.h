@@ -1,11 +1,16 @@
 #pragma once
 #include <SDL.h>
+#include "BasePieces.h"
 
 class BaseCase
 {
 public:
-	BaseCase();
+	BaseCase(int i_PosX, int i_PosY, BasePieces* i_Piece = nullptr);
 	~BaseCase();
+
+	int PosX;
+	int PosY;
+	BasePieces* m_Piece;
 
 	SDL_Surface* m_ImageBase = NULL;
 	SDL_Surface* m_ImageIlluminer = NULL;
