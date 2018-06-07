@@ -51,3 +51,8 @@ SDL_Surface* BasePieces::loadSurface(std::string path)
 {
 	return IMG_Load(path.c_str());
 }
+
+void BasePieces::Render(SDL_Surface* gScreenSurface, SDL_Rect* a_CaseRect)
+{
+	SDL_BlitSurface(m_ImageBase, NULL, gScreenSurface, a_CaseRect);
+}

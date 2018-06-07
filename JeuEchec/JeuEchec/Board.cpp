@@ -11,6 +11,7 @@
 
 Board::Board()
 {
+	m_BoardSurface = IMG_Load("ArtWork/Chessboard400.png");	
 	initialisation();
 }
 
@@ -68,5 +69,17 @@ void Board::initialisation()
 
 		}
 
+	}
+}
+
+void Board::Render(SDL_Surface* gScreenSurface)
+{
+	SDL_BlitSurface(m_BoardSurface, NULL, gScreenSurface, NULL);
+	for (int i = 0; i < m_Cases.size(); i++)
+	{
+		for (int x = 0; x < m_Cases[i].size(); x++)
+		{
+			m_Cases[i][x]->Render(gScreenSurface);
+		}
 	}
 }

@@ -12,6 +12,8 @@
 
 class Board
 {
+	SDL_Surface* m_BoardSurface = nullptr;
+
 public:
 	Board();
 	~Board();
@@ -23,5 +25,6 @@ public:
 	BasePieces* m_PiecesEnJeu[2][16];
 
 	void initialisation();
+	void Render(SDL_Surface* gScreenSurface);
 };
 

@@ -16,23 +16,14 @@ const int SCREEN_HEIGHT = 400;
 //Starts up SDL and creates window
 bool init();
 
-//Loads media
-bool loadMedia();
-
 //Frees media and shuts down SDL
 void close();
-
-//Loads individual image
-SDL_Surface* loadSurface(std::string path);
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
 
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
-
-//Current displayed PNG image
-SDL_Surface* gPNGSurface = NULL;
 
 bool init()
 {
@@ -74,27 +65,13 @@ bool init()
 	return success;
 }
 
-bool loadMedia()
-{
-	//Loading success flag
-	bool success = true;
 
-	//Load PNG surface
-	gPNGSurface = loadSurface("ArtWork/Chessboard400.png");
-	if (gPNGSurface == NULL)
-	{
-		printf("Failed to load PNG image!\n");
-		success = false;
-	}
-
-	return success;
-}
 
 void close()
 {
 	//Free loaded image
-	SDL_FreeSurface(gPNGSurface);
-	gPNGSurface = NULL;
+	//SDL_FreeSurface(gPNGSurface);
+	//gPNGSurface = NULL;
 
 	//Destroy window
 	SDL_DestroyWindow(gWindow);
@@ -121,64 +98,56 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		//Load media
-		if (!loadMedia())
+		//Main loop flag
+		bool quit = false;
+
+		//Event handler
+		SDL_Event e;
+
+		bool isButtonDown = false;
+		int mousePosX = 0;
+		int mousePosY = 0;
+
+		//While application is running
+		while (!quit)
 		{
-			printf("Failed to load media!\n");
-		}
-		else
-		{
-			//Main loop flag
-			bool quit = false;
-
-			//Event handler
-			SDL_Event e;
-
-			bool isButtonDown = false;
-			int mousePosX = 0;
-			int mousePosY = 0;
-
-			//While application is running
-			while (!quit)
+			//Handle events on queue
+			while (SDL_PollEvent(&e) != 0)
 			{
-				//Handle events on queue
-				while (SDL_PollEvent(&e) != 0)
+				if (e.type == SDL_QUIT)
 				{
-					if (e.type == SDL_QUIT)
-					{
-						quit = true;
-					}
-					if (e.type == SDL_MOUSEBUTTONDOWN)
-					{
-						isButtonDown = true;
-					}
-					if (e.type == SDL_MOUSEBUTTONUP)
-					{
-						isButtonDown = false;
-					}
-					if (e.type == SDL_MOUSEMOTION)
-					{
-						int x = 0;
-						int y = 0;
-						SDL_GetMouseState(&mousePosX, &mousePosY);
-					}
+					quit = true;
 				}
-
-				//Show mouse position X and Y
-				std::cout << mousePosX << " =X   " << mousePosY << " =Y " << std::endl;
-				//Show if ButtonDown
-				if (isButtonDown)
+				if (e.type == SDL_MOUSEBUTTONDOWN)
 				{
-					std::cout << "True" << std::endl;
+					isButtonDown = true;
 				}
-				
-
-				//Apply the PNG image
-				SDL_BlitSurface(gPNGSurface, NULL, gScreenSurface, NULL);
-
-				//Update the surface
-				SDL_UpdateWindowSurface(gWindow);
+				if (e.type == SDL_MOUSEBUTTONUP)
+				{
+					isButtonDown = false;
+				}
+				if (e.type == SDL_MOUSEMOTION)
+				{
+					int x = 0;
+					int y = 0;
+					SDL_GetMouseState(&mousePosX, &mousePosY);
+				}
 			}
+
+			//Show mouse position X and Y
+			std::cout << mousePosX << " =X   " << mousePosY << " =Y " << std::endl;
+			//Show if ButtonDown
+			if (isButtonDown)
+			{
+				std::cout << "True" << std::endl;
+			}
+
+			//Apply the PNG image
+			m_Board.Render(gScreenSurface);
+
+
+			//Update the surface
+			SDL_UpdateWindowSurface(gWindow);
 		}
 	}
 	//Free resources and close SDL

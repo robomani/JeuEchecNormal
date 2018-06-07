@@ -6,6 +6,8 @@
 
 class BaseCase
 {
+	SDL_Rect m_CaseRect;
+
 public:
 	BaseCase(int i_PosX, int i_PosY, BasePieces* i_Piece = nullptr);
 	~BaseCase();
@@ -21,5 +23,6 @@ public:
 
 	//La bool determine si l'on veut que la case soit illuminer
 	virtual bool Illuminer(bool i_Voulue);
+	void Render(SDL_Surface* gScreenSurface);
 };
 

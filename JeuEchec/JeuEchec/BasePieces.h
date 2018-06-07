@@ -17,6 +17,7 @@ public:
 	//La bool determine si l'on veut que la case soit illuminer
 	virtual bool Illuminer();
 	virtual void Detruire();
+	void Render(SDL_Surface* gScreenSurface, SDL_Rect* a_CaseRect);
 	bool GetColor();
 	SDL_Surface* loadSurface(std::string path);
 
