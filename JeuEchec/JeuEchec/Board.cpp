@@ -18,6 +18,19 @@ Board::Board()
 
 Board::~Board()
 {
+	for each (std::vector<BaseCase*> vectorOfVector in m_Cases)
+	{
+		for each (BaseCase* pointeurOfBaseCase in vectorOfVector)
+		{
+			if (pointeurOfBaseCase->m_Piece != nullptr)
+			{
+				delete pointeurOfBaseCase->m_Piece;
+				pointeurOfBaseCase->m_Piece = nullptr;
+			}
+			delete pointeurOfBaseCase;
+			pointeurOfBaseCase = nullptr;
+		}
+	}
 }
 
 
