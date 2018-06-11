@@ -8,8 +8,8 @@ BaseCase::BaseCase(int i_PosX, int i_PosY, BasePieces* i_Piece)
 	, m_Piece (i_Piece)
 	, m_CaseRect(SDL_Rect())
 {
-	m_CaseRect.x = PosX;
-	m_CaseRect.y = PosY;
+	m_CaseRect.x = PosX * 50;
+	m_CaseRect.y = PosY * 50;
 	m_CaseRect.w = 50;
 	m_CaseRect.h = 50;
 }
