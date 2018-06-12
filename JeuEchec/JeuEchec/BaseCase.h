@@ -6,10 +6,12 @@
 
 class BaseCase
 {
-	SDL_Rect m_CaseRect;
+
 
 public:
-	BaseCase(int i_PosX, int i_PosY, BasePieces* i_Piece = nullptr);
+	SDL_Rect m_CaseRect;
+
+	BaseCase(int i_PosX = -50, int i_PosY = -50, BasePieces* i_Piece = nullptr);
 	~BaseCase();
 
 	int PosX;

@@ -90,6 +90,8 @@ SDL_Surface* loadSurface(std::string path)
 int main(int argc, char* args[])
 {
 	Board m_Board = Board();
+	BaseCase* selectedPiece = nullptr;
+	//std::vector<Vector2> ValidMove; 
 
 	//Start up SDL and create window
 	if (!init())
@@ -120,6 +122,11 @@ int main(int argc, char* args[])
 				}
 				if (e.type == SDL_MOUSEBUTTONDOWN)
 				{
+					if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece != nullptr)
+					{
+						//validMove = m_Board.m_Cases[floor(mousePosX / 50)][floor(mousePosY / 50)]->m_Piece->VerifMouvLegal();
+						selectedPiece = m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)];
+					}
 					isButtonDown = true;
 				}
 				if (e.type == SDL_MOUSEBUTTONUP)
@@ -140,6 +147,32 @@ int main(int argc, char* args[])
 			if (isButtonDown)
 			{
 				std::cout << "True" << std::endl;
+				if (selectedPiece != nullptr)
+				{
+					selectedPiece->m_CaseRect.x = mousePosX -25;
+					selectedPiece->m_CaseRect.y = mousePosY -25;
+				}
+				
+			}
+			else
+			{
+				if (selectedPiece != nullptr)
+				{
+					/*
+					for (int i = 0; i < validMove.lenght; i++)
+					{
+						if (validMove[i].x = floor(mousePosX / 50) && validMove[i].y = floor(mousePosY / 50))
+						{
+							validMove[i]->m_Piece = selectedPiece->m_Piece;
+							*/
+							selectedPiece->m_CaseRect.x = selectedPiece->PosX * 50;
+							selectedPiece->m_CaseRect.y = selectedPiece->PosY * 50;
+							selectedPiece = nullptr;
+							/*
+						}
+					}	
+					*/
+				}
 			}
 
 			//Apply the PNG image
