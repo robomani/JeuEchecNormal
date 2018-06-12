@@ -1,14 +1,10 @@
 #pragma once
-#include "BasePieces.h"
 #include "Board.h"
-#include "Cavalier.h"
-#include "Dame.h"
-#include "Fou.h"
-#include "Pion.h"
-#include "Roi.h"
-#include "Tour.h"
-#include "BaseCase.h"
 #include <vector>
+#include "BasePieces.h"
+
+class BaseCase;
+
 
 class Board
 {

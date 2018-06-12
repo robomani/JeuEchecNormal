@@ -29,10 +29,10 @@ void Fou::Mouvement()
 {
 }
 
-bool Fou::VerifMouvLegal()
-{
-	return true;
-}
+//bool Fou::VerifMouvLegal()
+//{
+//	return true;
+//}
 
 bool Fou::Illuminer()
 {

@@ -29,10 +29,10 @@ void Tour::Mouvement()
 {
 }
 
-bool Tour::VerifMouvLegal()
-{
-	return true;
-}
+//bool Tour::VerifMouvLegal()
+//{
+//	return true;
+//}
 
 bool Tour::Illuminer()
 {

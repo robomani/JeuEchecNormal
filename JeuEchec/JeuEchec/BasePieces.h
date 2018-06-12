@@ -2,6 +2,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
+#include "Vector2.h"
+#include <vector>
+//#include "Board.h"
+
+class Board;
 
 class BasePieces
 {
@@ -12,17 +17,17 @@ public:
 	
 	bool Selected;
 
-	virtual bool VerifMouvLegal();
+	virtual std::vector<Vector2> VerifMouvLegal(const Board& i_Board) { return std::vector<Vector2>(); }
 	virtual void Mouvement();
 	//La bool determine si l'on veut que la case soit illuminer
 	virtual bool Illuminer();
 	virtual void Detruire();
 	void Render(SDL_Surface* gScreenSurface, SDL_Rect* a_CaseRect);
-	bool GetColor();
+	bool IsBlack();
 	SDL_Surface* loadSurface(std::string path);
 
 protected:
-	bool Noir;
+	bool isBlack;
 	int m_PosX;
 	int m_PosY;
 	SDL_Surface* m_ImageBase = NULL;

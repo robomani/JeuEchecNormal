@@ -30,10 +30,10 @@ void Cavalier::Mouvement()
 {
 }
 
-bool Cavalier::VerifMouvLegal()
-{
-	return true;
-}
+//bool Cavalier::VerifMouvLegal()
+//{
+//	return true;
+//}
 
 bool Cavalier::Illuminer()
 {

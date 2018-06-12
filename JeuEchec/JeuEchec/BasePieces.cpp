@@ -1,4 +1,5 @@
 #include "BasePieces.h"
+#include "Board.h"
 #include <math.h>
 
 
@@ -11,15 +12,6 @@ BasePieces::BasePieces(int i_PosX, int i_PosY)
 
 BasePieces::~BasePieces()
 {
-}
-
-bool BasePieces::VerifMouvLegal()
-{
-	
-	//if (floor(mousePosX/50) >= 0 && Floor(mousePosX/50) <= 7 && Floor(mousePosY/50) >= 0 && Floor(mousePosY/50) <= 7)
-	{
-		return true;
-	}
 }
 
 void BasePieces::Mouvement()
@@ -42,9 +34,9 @@ void BasePieces::Detruire()
 	m_PosY = -1;
 }
 
-bool BasePieces::GetColor()
+bool BasePieces::IsBlack()
 {
-	return Noir;
+	return isBlack;
 }
 
 SDL_Surface* BasePieces::loadSurface(std::string path)

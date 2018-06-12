@@ -33,10 +33,10 @@ void Roi::Mouvement()
 {
 }
 
-bool Roi::VerifMouvLegal()
-{
-	return true;
-}
+//bool Roi::VerifMouvLegal()
+//{
+//	return true;
+//}
 
 bool Roi::Illuminer()
 {

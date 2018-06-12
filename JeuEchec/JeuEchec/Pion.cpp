@@ -32,10 +32,10 @@ void Pion::Mouvement()
 {
 }
 
-bool Pion::VerifMouvLegal()
-{
-	return true;
-}
+//bool Pion::VerifMouvLegal()
+//{
+//	return true;
+//}
 
 bool Pion::Illuminer()
 {
