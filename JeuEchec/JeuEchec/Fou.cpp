@@ -20,14 +20,16 @@ Fou::~Fou()
 {
 }
 
+void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX)
+{
+
+
+
+}
+
 /*
 void Fou::Mouvement()
 {
-}
-
-bool Fou::VerifMouvLegal()
-{
-	return true;
 }
 
 bool Fou::Illuminer()
