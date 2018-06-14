@@ -142,11 +142,15 @@ int main(int argc, char* args[])
 					Save(gameTurns);
 					quit = true;
 				}
+				if (e.type == SDL_KEYDOWN)
+				{
+					Save(gameTurns);
+					quit = true;
+				}
 				if (e.type == SDL_MOUSEBUTTONDOWN)
 				{
 					if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece != nullptr)
 					{
-						//validMove = m_Board.m_Cases[floor(mousePosX / 50)][floor(mousePosY / 50)]->m_Piece->VerifMouvLegal();
 						selectedPiece = m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)];
 						std::cout << "Case X = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosX << " Y = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosY << std::endl;
 						currentTurn.StartX = floor(mousePosX / 50);
@@ -168,10 +172,16 @@ int main(int argc, char* args[])
 							selectedPiece->PosX = floor(mousePosX / 50);
 							currentTurn.EndX = floor(mousePosX / 50);
 							currentTurn.EndY = floor(mousePosY / 50);
+							if (m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece)
+							{
+								delete m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece;
+							}
 							m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece = selectedPiece->m_Piece;
 							selectedPiece->m_Piece->hasMoved = true;
 							m_Board.m_Cases[currentTurn.StartY][currentTurn.StartX]->m_Piece = nullptr;
 							gameTurns.push_back(currentTurn);
+							selectedPiece->m_CaseRect.x = currentTurn.StartX * 50;
+							selectedPiece->m_CaseRect.y = currentTurn.StartY * 50;
 							selectedPiece = nullptr;
 							ChangeTurn(timePlayerWhite, timePlayerBlack, TurnPlayerWhite);
 						}
