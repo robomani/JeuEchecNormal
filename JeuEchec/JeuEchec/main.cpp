@@ -151,9 +151,7 @@ int main(int argc, char* args[])
 						std::cout << "Case X = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosX << " Y = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosY << std::endl;
 						currentTurn.StartX = floor(mousePosX / 50);
 						currentTurn.StartY = floor(mousePosY / 50);
-						selectedPiece->m_Piece->LightPossibleMoves(m_Board);
-						std::cout << "Am I Black : " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece->IsBlack();
-						std::cout << "Is Alight : " << m_Board.m_Cases[floor(mousePosY / 50) + 1][floor(mousePosX / 50)]->isAlight;
+						selectedPiece->m_Piece->LightPossibleMoves(m_Board, floor(mousePosY / 50), floor(mousePosX / 50));
 					}
 					isButtonDown = true;
 				}
@@ -171,8 +169,10 @@ int main(int argc, char* args[])
 							currentTurn.EndX = floor(mousePosX / 50);
 							currentTurn.EndY = floor(mousePosY / 50);
 							m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece = selectedPiece->m_Piece;
+							selectedPiece->m_Piece->hasMoved = true;
 							m_Board.m_Cases[currentTurn.StartY][currentTurn.StartX]->m_Piece = nullptr;
 							gameTurns.push_back(currentTurn);
+							selectedPiece = nullptr;
 							ChangeTurn(timePlayerWhite, timePlayerBlack, TurnPlayerWhite);
 						}
 						else

@@ -4,7 +4,7 @@ class Tour :
 	public BasePieces
 {
 public:
-	Tour(bool i_Black, int i_PosX, int i_PosY);
+	Tour(bool i_Black);
 	~Tour();
 
 	/*

@@ -2,8 +2,8 @@
 
 
 
-Roi::Roi(bool i_Black, int i_PosX, int i_PosY)
-	: BasePieces(i_Black, i_PosX, i_PosY)
+Roi::Roi(bool i_Black)
+	: BasePieces(i_Black)
 {
 	if (i_Black)
 	{

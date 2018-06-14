@@ -10,15 +10,13 @@ class Pion :
 	public BasePieces
 {
 public:
-	Pion(bool i_Black, int i_PosX, int i_PosY);
+	Pion(bool i_Black);
 	~Pion();
-
-	bool hasMoved = false;
 
 	bool IsBlack();
 	void Promotion();
 	void Mouvement();
-	void LightPossibleMoves(const Board& i_Board);
+	void LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX);
 	void Destroy();
 };
 

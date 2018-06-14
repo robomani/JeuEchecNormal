@@ -2,8 +2,8 @@
 
 
 
-Pion::Pion(bool i_Black, int i_PosX, int i_PosY)
-	: BasePieces(i_Black, i_PosX, i_PosY)
+Pion::Pion(bool i_Black)
+	: BasePieces(i_Black)
 {
 	if (i_Black)
 	{
@@ -33,7 +33,7 @@ void Pion::Mouvement()
 {
 }
 
-void Pion::LightPossibleMoves(const Board& i_Board)
+void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX)
 {
 	int directionY = 1;
 
@@ -43,40 +43,44 @@ void Pion::LightPossibleMoves(const Board& i_Board)
 	}
 
 	//Look for one case movement
-	if (i_Board.m_Cases[m_PosY + directionY][m_PosX]->m_Piece == nullptr)
+	if (i_Board.m_Cases[i_PosY + directionY][i_PosX]->m_Piece == nullptr)
 	{
-		i_Board.m_Cases[m_PosY + directionY][m_PosX]->SetCaseLight(true);
+		i_Board.m_Cases[i_PosY + directionY][i_PosX]->SetCaseLight(true);
 	}
 	
 	
 	//Is has not moved look for double movement
-	if (!hasMoved && i_Board.m_Cases[m_PosY + directionY][m_PosX]->m_Piece == nullptr)
+	if (!hasMoved && i_Board.m_Cases[i_PosY + directionY][i_PosX]->m_Piece == nullptr)
 	{
-		if (i_Board.m_Cases[m_PosY + directionY + directionY][m_PosX]->m_Piece == nullptr)
+		if (i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->m_Piece == nullptr)
 		{
-			i_Board.m_Cases[m_PosY + directionY + directionY][m_PosX]->SetCaseLight(true);
+			i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->SetCaseLight(true);
 		}
 	}
 	
 	
 	//Look For a enemy left/fwrd or right/fwrd
-	/*
-	if (m_PosX < 7)
+	if (i_PosX < 7)
 	{
-		if (i_Board.m_Cases[m_PosY + directionY][m_PosX + 1]->m_Piece->IsBlack() != IsBlack())
+		if (i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece != nullptr)
 		{
-			i_Board.m_Cases[m_PosY + directionY][m_PosX + 1]->SetCaseLight(true);
+			if (i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetCaseLight(true);
+			}
 		}
 	}
 	
-	if (m_PosX > 0)
+	if (i_PosX > 0)
 	{
-		if (i_Board.m_Cases[m_PosY + directionY][m_PosX - 1]->m_Piece->IsBlack() != IsBlack())
+		if (i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece != nullptr)
 		{
-			i_Board.m_Cases[m_PosY + directionY][m_PosX - 1]->SetCaseLight(true);
+			if (i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetCaseLight(true);
+			}
 		}
 	}
-	*/
 }
 
 void Pion::Destroy()
