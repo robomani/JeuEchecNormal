@@ -126,6 +126,7 @@ int main(int argc, char* args[])
 					{
 						//validMove = m_Board.m_Cases[floor(mousePosX / 50)][floor(mousePosY / 50)]->m_Piece->VerifMouvLegal();
 						selectedPiece = m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)];
+						std::cout << "Case X = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosX << " Y = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosY << std::endl;
 					}
 					isButtonDown = true;
 				}
@@ -142,11 +143,11 @@ int main(int argc, char* args[])
 			}
 
 			//Show mouse position X and Y
-			std::cout << mousePosX << " =X   " << mousePosY << " =Y " << std::endl;
+			//std::cout << mousePosX << " =X   " << mousePosY << " =Y " << std::endl;
 			//Show if ButtonDown
 			if (isButtonDown)
 			{
-				std::cout << "True" << std::endl;
+				//std::cout << "True" << std::endl;
 				if (selectedPiece != nullptr)
 				{
 					selectedPiece->m_CaseRect.x = mousePosX -25;
