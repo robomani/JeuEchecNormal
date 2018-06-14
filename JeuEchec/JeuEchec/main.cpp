@@ -33,7 +33,7 @@ SDL_Surface* gScreenSurface = NULL;
 
 void Save(std::vector<Turn>& iGameTurns);
 std::vector<Turn> Load();
-void ChangeTurn(const float& i_TimePlayerWhite, const float& i_TimePlayerBlack);
+void ChangeTurn(const float& i_TimePlayerWhite, const float& i_TimePlayerBlack, bool& i_PlayerTurn);
 
 
 bool init()
@@ -198,30 +198,36 @@ int main(int argc, char* args[])
 			{
 				if (selectedPiece != nullptr)
 				{
-					/*
-					for (int i = 0; i < validMove.lenght; i++)
+
+					if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->isAlight)
+					{	
+						selectedPiece->PosY = floor(mousePosY / 50);
+						selectedPiece->PosX = floor(mousePosX / 50);
+						currentTurn.EndX = floor(mousePosX / 50);
+						currentTurn.EndY = floor(mousePosY / 50);
+						m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece = selectedPiece->m_Piece;
+						m_Board.m_Cases[currentTurn.StartY][currentTurn.StartX]->m_Piece = nullptr;
+						gameTurns.push_back(currentTurn);
+						ChangeTurn(timePlayerWhite, timePlayerBlack, TurnPlayerWhite);
+					}
+					else
 					{
-						if (validMove[i].x = floor(mousePosX / 50) && validMove[i].y = floor(mousePosY / 50))
+
+						selectedPiece->m_CaseRect.x = selectedPiece->PosX * 50;
+						selectedPiece->m_CaseRect.y = selectedPiece->PosY * 50;
+						selectedPiece = nullptr;
+						for (int i = 0; i < m_Board.m_Cases.size(); i++)
 						{
-							validMove[i]->m_Piece = selectedPiece->m_Piece;
-							currentTurn.EndX = floor(mousePosX / 50);
-							currentTurn.EndY = floor(mousePosY / 50);
-							gameTurns.push_back(currentTurn);
-							ChangeTurn(timePlayerWhite, timePlayerBlack);
+							for (int x = 0; x < m_Board.m_Cases[i].size(); x++)
+							{
+								m_Board.m_Cases[i][x]->SetCaseLight(false);
+							}
+
 						}
-						else
-						{
-						*/
-							selectedPiece->m_CaseRect.x = selectedPiece->PosX * 50;
-							selectedPiece->m_CaseRect.y = selectedPiece->PosY * 50;
-							selectedPiece = nullptr;
-						/*
-						}
-					}	
-					*/
+
+					}
 				}
 			}
-
 			//Apply the PNG image
 			m_Board.Render(gScreenSurface);
 
@@ -236,11 +242,12 @@ int main(int argc, char* args[])
 	return 0;
 }
 
-void ChangeTurn(const float& i_TimePlayerWhite,const float& i_TimePlayerBlack)
+void ChangeTurn(const float& i_TimePlayerWhite,const float& i_TimePlayerBlack, bool& i_PlayerTurn)
 {
+	i_PlayerTurn = !i_PlayerTurn;
 	std::cout << std::fixed;
 	std::cout << std::setprecision(0);
-	system("cls");
+	//system("cls");
 	std::cout << "Time for player White : " << i_TimePlayerWhite << " / Time for player Black :  " << i_TimePlayerBlack << std::endl;
 }
 
