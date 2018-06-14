@@ -46,41 +46,38 @@ void Board::initialisation()
 				switch (x)
 				{
 				case 0:
-					m_Cases[i].push_back(new BaseCase(x, i, new Tour(i, x, i)));
+					m_Cases[i].push_back(new BaseCase(x, i, new Tour(i)));
 					break;
 				case 1:
-					m_Cases[i].push_back(new BaseCase(x, i, new Cavalier(i, x, i)));
+					m_Cases[i].push_back(new BaseCase(x, i, new Cavalier(i)));
 					break;
 				case 2:
-					m_Cases[i].push_back(new BaseCase(x, i, new Fou(i, x, i)));
+					m_Cases[i].push_back(new BaseCase(x, i, new Fou(i)));
 					break;
 				case 3:
-					m_Cases[i].push_back(new BaseCase(x, i, new Dame(i, x, i)));
+					m_Cases[i].push_back(new BaseCase(x, i, new Dame(i)));
 					break;
 				case 4:
-					m_Cases[i].push_back(new BaseCase(x, i, new Roi(i, x, i)));
+					m_Cases[i].push_back(new BaseCase(x, i, new Roi(i)));
 					break;
 				case 5:
-					m_Cases[i].push_back(new BaseCase(x, i, new Fou(i, x, i)));
+					m_Cases[i].push_back(new BaseCase(x, i, new Fou(i)));
 					break;
 				case 6:
-					m_Cases[i].push_back(new BaseCase(x, i, new Cavalier(i, x, i)));
+					m_Cases[i].push_back(new BaseCase(x, i, new Cavalier(i)));
 					break;
 				case 7:
-					m_Cases[i].push_back(new BaseCase(x, i, new Tour(i, x, i)));
-					break;
-				default:
-					m_Cases[i].push_back(new BaseCase(x - 8, (i * 5) + 1, new Pion(i, x - 8, (i * 5) + 1)));
+					m_Cases[i].push_back(new BaseCase(x, i, new Tour(i)));
 					break;
 				}
 			}
 			else if(i == 1)
 			{
-				m_Cases[i].push_back(new BaseCase(x, i, new Pion(0, x,i)));
+				m_Cases[i].push_back(new BaseCase(x, i, new Pion(0)));
 			}
 			else if (i == 6)
 			{
-				m_Cases[i].push_back(new BaseCase(x, i, new Pion(1, x, i)));
+				m_Cases[i].push_back(new BaseCase(x, i, new Pion(1)));
 			}
 			else
 			{

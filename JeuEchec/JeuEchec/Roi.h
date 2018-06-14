@@ -4,7 +4,7 @@ class Roi :
 	public BasePieces
 {
 public:
-	Roi(bool i_Black, int i_PosX, int i_PosY);
+	Roi(bool i_Black);
 	~Roi();
 
 	/*

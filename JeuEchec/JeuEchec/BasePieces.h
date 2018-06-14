@@ -10,13 +10,13 @@ class Board;
 class BasePieces
 {
 public:
-	BasePieces(bool i_Black, int i_PosX, int i_PosY);
+	BasePieces(bool i_Black);
 	~BasePieces();
 
 	
 	bool Selected;
 
-	virtual void LightPossibleMoves(const Board& i_Board);
+	virtual void LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX);
 	virtual void Mouvement();
 	virtual void Destroy();
 	void Render(SDL_Surface* gScreenSurface, SDL_Rect* a_CaseRect);
@@ -25,8 +25,6 @@ public:
 
 protected:
 	bool m_Black;
-	int m_PosX;
-	int m_PosY;
 	SDL_Surface* m_ImageBase = NULL;
 };
 

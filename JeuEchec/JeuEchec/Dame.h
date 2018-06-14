@@ -4,7 +4,7 @@ class Dame :
 	public BasePieces
 {
 public:
-	Dame(bool i_Black, int i_PosX, int i_PosY);
+	Dame(bool i_Black);
 	~Dame();
 
 	/*

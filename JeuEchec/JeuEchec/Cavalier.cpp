@@ -2,8 +2,8 @@
 
 
 
-Cavalier::Cavalier(bool i_Black, int i_PosX, int i_PosY)
-	:BasePieces(i_Black, i_PosX, i_PosY)
+Cavalier::Cavalier(bool i_Black)
+	:BasePieces(i_Black)
 {
 	if (i_Black)
 	{
@@ -20,14 +20,23 @@ Cavalier::~Cavalier()
 {
 }
 
+void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const int& i_PosX)
+{
+	if (i_PosX > 0)
+	{
+		if (i_PosY > 1)
+		{
+			if (i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->SetCaseLight(true);
+			}
+		}
+	}
+}
+
 /*
 void Cavalier::Mouvement()
 {
-}
-
-bool Cavalier::VerifMouvLegal()
-{
-	return true;
 }
 
 bool Cavalier::Illuminer()

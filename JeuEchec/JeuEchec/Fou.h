@@ -4,7 +4,7 @@ class Fou :
 	public BasePieces
 {
 public:
-	Fou(bool i_Black, int i_PosX, int i_PosY);
+	Fou(bool i_Black);
 	~Fou();
 
 	/*
