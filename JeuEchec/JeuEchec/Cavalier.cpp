@@ -61,7 +61,7 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 	if (i_PosX < 7 && i_PosY < 6)
 	{
 		if (i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->m_Piece == nullptr
-			|| i_Board.m_Cases[i_PosY + 1][i_PosX + 1]->m_Piece->IsBlack() != IsBlack())
+			|| i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->m_Piece->IsBlack() != IsBlack())
 		{
 			i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->SetCaseLight(true);
 		}

@@ -172,6 +172,8 @@ int main(int argc, char* args[])
 							selectedPiece->m_Piece->hasMoved = true;
 							m_Board.m_Cases[currentTurn.StartY][currentTurn.StartX]->m_Piece = nullptr;
 							gameTurns.push_back(currentTurn);
+							selectedPiece->m_CaseRect.x = currentTurn.StartX * 50;
+							selectedPiece->m_CaseRect.y = currentTurn.StartY * 50;
 							selectedPiece = nullptr;
 							ChangeTurn(timePlayerWhite, timePlayerBlack, TurnPlayerWhite);
 						}
