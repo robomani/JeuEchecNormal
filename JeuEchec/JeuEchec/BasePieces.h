@@ -13,7 +13,7 @@ public:
 	BasePieces(bool i_Black, int i_PosX, int i_PosY);
 	~BasePieces();
 
-	
+	bool hasMoved = false;
 	bool Selected;
 
 	virtual void LightPossibleMoves(const Board& i_Board);
