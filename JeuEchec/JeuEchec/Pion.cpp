@@ -28,21 +28,47 @@ Pion::~Pion()
 void Pion::Promotion()
 {
 }
+
 void Pion::Mouvement()
 {
 }
 
-//bool Pion::VerifMouvLegal()
-//{
-//	return true;
-//}
-
-bool Pion::Illuminer()
+void Pion::LightPossibleMoves(const Board& i_Board)
 {
-	return true;
+	int directionY = 1;
+
+	if (IsBlack())
+	{
+		directionY = -1;
+	}
+
+	//Look for one case movement
+	if (i_Board.m_Cases[floor(m_PosY / 50) + directionY][floor(m_PosX / 50)]->m_Piece == nullptr)
+	{
+		i_Board.m_Cases[floor(m_PosY / 50) + directionY][floor(m_PosX / 50)]->SetCaseLight(true);
+	}
+	
+	//Is has not moved look for double movement
+	if (!hasMoved && i_Board.m_Cases[floor(m_PosY / 50) + directionY][floor(m_PosX / 50)]->m_Piece == nullptr)
+	{
+		if (i_Board.m_Cases[floor(m_PosY / 50) + directionY + directionY][floor(m_PosX / 50)]->m_Piece == nullptr)
+		{
+			i_Board.m_Cases[floor(m_PosY / 50) + directionY + directionY][floor(m_PosX / 50)]->SetCaseLight(true);
+		}
+	}
+	
+	//Look For a enemy left/fwrd or right/fwrd
+	if (i_Board.m_Cases[floor(m_PosY / 50) + directionY][floor(m_PosX / 50) + 1]->m_Piece->IsBlack() != IsBlack())
+	{
+		i_Board.m_Cases[floor(m_PosY / 50) + directionY][floor(m_PosX / 50) + 1]->SetCaseLight(true);
+	}	
+	
+	if (i_Board.m_Cases[floor(m_PosY / 50) + directionY][floor(m_PosX / 50) - 1]->m_Piece->IsBlack() != IsBlack())
+	{
+		i_Board.m_Cases[floor(m_PosY / 50) + directionY][floor(m_PosX / 50) - 1]->SetCaseLight(true);
+	}
 }
 
-void Pion::Detruire()
+void Pion::Destroy()
 {
 }
-

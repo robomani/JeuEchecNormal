@@ -25,6 +25,7 @@ Roi::~Roi()
 {
 }
 
+/*
 void Roi::Roque()
 {
 }
@@ -33,10 +34,10 @@ void Roi::Mouvement()
 {
 }
 
-//bool Roi::VerifMouvLegal()
-//{
-//	return true;
-//}
+bool Roi::VerifMouvLegal()
+{
+	return true;
+}
 
 bool Roi::Illuminer()
 {
@@ -46,3 +47,4 @@ bool Roi::Illuminer()
 void Roi::Detruire()
 {
 }
+*/

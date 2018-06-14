@@ -25,14 +25,15 @@ Dame::~Dame()
 {
 }
 
+/*
 void Dame::Mouvement()
 {
 }
 
-//bool Dame::VerifMouvLegal()
-//{
-//	return true;
-//}
+bool Dame::VerifMouvLegal()
+{
+	return true;
+}
 
 bool Dame::Illuminer()
 {
@@ -42,3 +43,4 @@ bool Dame::Illuminer()
 void Dame::Detruire()
 {
 }
+*/

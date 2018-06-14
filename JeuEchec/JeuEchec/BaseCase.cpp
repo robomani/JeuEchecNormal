@@ -8,6 +8,7 @@ BaseCase::BaseCase(int i_PosX, int i_PosY, BasePieces* i_Piece)
 	, m_Piece (i_Piece)
 	, m_CaseRect(SDL_Rect())
 {
+	m_ImageLight = loadSurface("ArtWork/Alight_Case.png");
 	m_CaseRect.x = PosX * 50;
 	m_CaseRect.y = PosY * 50;
 	m_CaseRect.w = 50;
@@ -19,17 +20,18 @@ BaseCase::~BaseCase()
 {
 }
 
-bool BaseCase::Illuminer(bool i_Voulue)
+void BaseCase::SetCaseLight(bool i_toLight)
 {
-	if (i_Voulue)
+	if (i_toLight)
 	{
-		m_ImageCurrent = m_ImageIlluminer;
+		m_ImageCurrent = m_ImageLight;
+		isAlight = true;
 	}
 	else
 	{
 		m_ImageCurrent = m_ImageBase;
+		isAlight = false;
 	}
-	return true;
 }
 
 SDL_Surface* BaseCase::loadSurface(std::string path)

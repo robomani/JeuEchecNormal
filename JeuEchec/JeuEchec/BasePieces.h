@@ -16,11 +16,10 @@ public:
 	
 	bool Selected;
 
-	virtual std::vector<Vector2> VerifMouvLegal(const Board& i_Board) { return std::vector<Vector2>(); }
+	virtual void LightPossibleMoves(const Board& i_Board);
 	virtual void Mouvement();
 	//La bool determine si l'on veut que la case soit illuminer
-	virtual bool Illuminer();
-	virtual void Detruire();
+	virtual void Destroy();
 	void Render(SDL_Surface* gScreenSurface, SDL_Rect* a_CaseRect);
 	bool IsBlack();
 	SDL_Surface* loadSurface(std::string path);
