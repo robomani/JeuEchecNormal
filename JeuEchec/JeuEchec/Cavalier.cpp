@@ -22,14 +22,75 @@ Cavalier::~Cavalier()
 
 void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const int& i_PosX)
 {
-	if (i_PosX > 0)
+	if (i_PosX > 0 && i_PosY > 1)
 	{
-		if (i_PosY > 1)
+		if (i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->m_Piece == nullptr
+		|| i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->m_Piece->IsBlack() != IsBlack())
 		{
-			if (i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->m_Piece->IsBlack() != IsBlack())
-			{
-				i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->SetCaseLight(true);
-			}
+			i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->SetCaseLight(true);
+		}	
+	}
+
+	if (i_PosX < 7 && i_PosY > 1)
+	{
+		if (i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->m_Piece == nullptr
+		|| i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->SetCaseLight(true);
+		}
+	}
+
+	if (i_PosX < 6 && i_PosY > 0)
+	{
+		if (i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->m_Piece == nullptr
+			|| i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->SetCaseLight(true);
+		}
+	}
+
+	if (i_PosX < 6 && i_PosY < 7)
+	{
+		if (i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->m_Piece == nullptr
+			|| i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->SetCaseLight(true);
+		}
+	}
+
+	if (i_PosX < 7 && i_PosY < 6)
+	{
+		if (i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->m_Piece == nullptr
+			|| i_Board.m_Cases[i_PosY + 1][i_PosX + 1]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->SetCaseLight(true);
+		}
+	}
+
+	if (i_PosX > 0 && i_PosY < 6)
+	{
+		if (i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->m_Piece == nullptr
+			|| i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->SetCaseLight(true);
+		}
+	}
+
+	if (i_PosX > 1 && i_PosY < 7)
+	{
+		if (i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->m_Piece == nullptr
+			|| i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->SetCaseLight(true);
+		}
+	}
+
+	if (i_PosX > 1 && i_PosY > 0)
+	{
+		if (i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->m_Piece == nullptr
+			|| i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->SetCaseLight(true);
 		}
 	}
 }
