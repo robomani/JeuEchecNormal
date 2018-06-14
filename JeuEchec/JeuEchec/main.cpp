@@ -127,6 +127,9 @@ int main(int argc, char* args[])
 						//validMove = m_Board.m_Cases[floor(mousePosX / 50)][floor(mousePosY / 50)]->m_Piece->VerifMouvLegal();
 						selectedPiece = m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)];
 						std::cout << "Case X = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosX << " Y = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosY << std::endl;
+						selectedPiece->m_Piece->LightPossibleMoves(m_Board);
+						std::cout << "Am I Black : " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece->IsBlack();
+						std::cout << "Is Alight : " << m_Board.m_Cases[floor(mousePosY / 50) + 1][floor(mousePosX / 50)]->isAlight;
 					}
 					isButtonDown = true;
 				}

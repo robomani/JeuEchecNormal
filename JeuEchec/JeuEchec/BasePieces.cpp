@@ -14,6 +14,11 @@ BasePieces::~BasePieces()
 {
 }
 
+void BasePieces::LightPossibleMoves(const Board& i_Board)
+{
+
+}
+
 void BasePieces::Mouvement()
 {
 	//if (VerifMouvLegal())
@@ -23,12 +28,7 @@ void BasePieces::Mouvement()
 	}
 }
 
-bool BasePieces::Illuminer()
-{
-	return true;
-}
-
-void BasePieces::Detruire()
+void BasePieces::Destroy()
 {
 	m_PosX = -1;
 	m_PosY = -1;

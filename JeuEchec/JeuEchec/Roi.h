@@ -7,8 +7,10 @@ public:
 	Roi(bool i_Black, int i_PosX, int i_PosY);
 	~Roi();
 
+	/*
 	bool Bouger = false;
 	bool Echec = false;
+
 
 	void Roque();
 
@@ -16,5 +18,6 @@ public:
 	//bool VerifMouvLegal() override;
 	bool Illuminer() override;
 	void Detruire() override;
+	*/
 };
 

@@ -13,11 +13,6 @@ Roi::Roi(bool i_Black, int i_PosX, int i_PosY)
 	{
 		m_ImageBase = loadSurface("ArtWork/White_King.png");
 	}
-
-	m_Rect.x = m_PosX;
-	m_Rect.y = m_PosY;
-	m_Rect.h = m_ImageBase->h;
-	m_Rect.w = m_ImageBase->w;
 }
 
 
@@ -25,6 +20,7 @@ Roi::~Roi()
 {
 }
 
+/*
 void Roi::Roque()
 {
 }
@@ -33,10 +29,10 @@ void Roi::Mouvement()
 {
 }
 
-//bool Roi::VerifMouvLegal()
-//{
-//	return true;
-//}
+bool Roi::VerifMouvLegal()
+{
+	return true;
+}
 
 bool Roi::Illuminer()
 {
@@ -46,3 +42,4 @@ bool Roi::Illuminer()
 void Roi::Detruire()
 {
 }
+*/

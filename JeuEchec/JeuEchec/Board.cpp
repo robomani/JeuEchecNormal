@@ -20,15 +20,15 @@ Board::~Board()
 {
 	for each (std::vector<BaseCase*> vectorOfVector in m_Cases)
 	{
-		for each (BaseCase* pointeurOfBaseCase in vectorOfVector)
+		for each (BaseCase* pointerOfBaseCase in vectorOfVector)
 		{
-			if (pointeurOfBaseCase->m_Piece != nullptr)
+			if (pointerOfBaseCase->m_Piece != nullptr)
 			{
-				delete pointeurOfBaseCase->m_Piece;
-				pointeurOfBaseCase->m_Piece = nullptr;
+				delete pointerOfBaseCase->m_Piece;
+				pointerOfBaseCase->m_Piece = nullptr;
 			}
-			delete pointeurOfBaseCase;
-			pointeurOfBaseCase = nullptr;
+			delete pointerOfBaseCase;
+			pointerOfBaseCase = nullptr;
 		}
 	}
 }
@@ -86,10 +86,7 @@ void Board::initialisation()
 			{
 				m_Cases[i].push_back(new BaseCase(x, i));
 			}
-			
-
 		}
-
 	}
 }
 

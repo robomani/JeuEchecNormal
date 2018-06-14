@@ -13,11 +13,6 @@ Fou::Fou(bool i_Black, int i_PosX, int i_PosY)
 	{
 		m_ImageBase = loadSurface("ArtWork/White_Bishop.png");
 	}
-
-	m_Rect.x = m_PosX;
-	m_Rect.y = m_PosY;
-	m_Rect.h = m_ImageBase->h;
-	m_Rect.w = m_ImageBase->w;
 }
 
 
@@ -25,14 +20,15 @@ Fou::~Fou()
 {
 }
 
+/*
 void Fou::Mouvement()
 {
 }
 
-//bool Fou::VerifMouvLegal()
-//{
-//	return true;
-//}
+bool Fou::VerifMouvLegal()
+{
+	return true;
+}
 
 bool Fou::Illuminer()
 {
@@ -42,3 +38,4 @@ bool Fou::Illuminer()
 void Fou::Detruire()
 {
 }
+*/

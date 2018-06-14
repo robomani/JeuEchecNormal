@@ -13,12 +13,6 @@ Cavalier::Cavalier(bool i_Black, int i_PosX, int i_PosY)
 	{
 		m_ImageBase = loadSurface("ArtWork/White_Horse.png");
 	}
-
-
-	m_Rect.x = m_PosX;
-	m_Rect.y = m_PosY;
-	m_Rect.h = m_ImageBase->h;
-	m_Rect.w = m_ImageBase->w;
 }
 
 
@@ -26,14 +20,15 @@ Cavalier::~Cavalier()
 {
 }
 
+/*
 void Cavalier::Mouvement()
 {
 }
 
-//bool Cavalier::VerifMouvLegal()
-//{
-//	return true;
-//}
+bool Cavalier::VerifMouvLegal()
+{
+	return true;
+}
 
 bool Cavalier::Illuminer()
 {
@@ -43,3 +38,4 @@ bool Cavalier::Illuminer()
 void Cavalier::Detruire()
 {
 }
+*/

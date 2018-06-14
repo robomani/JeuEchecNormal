@@ -13,11 +13,6 @@ Pion::Pion(bool i_Black, int i_PosX, int i_PosY)
 	{
 		m_ImageBase = loadSurface("ArtWork/White_Pawn.png");
 	}
-
-	m_Rect.x = m_PosX;
-	m_Rect.y = m_PosY;
-	m_Rect.h = m_ImageBase->h;
-	m_Rect.w = m_ImageBase->w;
 }
 
 
@@ -25,24 +20,65 @@ Pion::~Pion()
 {
 }
 
+bool Pion::IsBlack()
+{
+	return BasePieces::IsBlack();
+}
+
 void Pion::Promotion()
 {
 }
+
 void Pion::Mouvement()
 {
 }
 
-//bool Pion::VerifMouvLegal()
-//{
-//	return true;
-//}
-
-bool Pion::Illuminer()
+void Pion::LightPossibleMoves(const Board& i_Board)
 {
-	return true;
+	int directionY = 1;
+
+	if (IsBlack())
+	{
+		directionY = -1;
+	}
+
+	//Look for one case movement
+	if (i_Board.m_Cases[m_PosY + directionY][m_PosX]->m_Piece == nullptr)
+	{
+		i_Board.m_Cases[m_PosY + directionY][m_PosX]->SetCaseLight(true);
+	}
+	
+	
+	//Is has not moved look for double movement
+	if (!hasMoved && i_Board.m_Cases[m_PosY + directionY][m_PosX]->m_Piece == nullptr)
+	{
+		if (i_Board.m_Cases[m_PosY + directionY + directionY][m_PosX]->m_Piece == nullptr)
+		{
+			i_Board.m_Cases[m_PosY + directionY + directionY][m_PosX]->SetCaseLight(true);
+		}
+	}
+	
+	
+	//Look For a enemy left/fwrd or right/fwrd
+	/*
+	if (m_PosX < 7)
+	{
+		if (i_Board.m_Cases[m_PosY + directionY][m_PosX + 1]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[m_PosY + directionY][m_PosX + 1]->SetCaseLight(true);
+		}
+	}
+	
+	if (m_PosX > 0)
+	{
+		if (i_Board.m_Cases[m_PosY + directionY][m_PosX - 1]->m_Piece->IsBlack() != IsBlack())
+		{
+			i_Board.m_Cases[m_PosY + directionY][m_PosX - 1]->SetCaseLight(true);
+		}
+	}
+	*/
 }
 
-void Pion::Detruire()
+void Pion::Destroy()
 {
 }
-

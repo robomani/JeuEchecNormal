@@ -13,11 +13,6 @@ Tour::Tour(bool i_Black, int i_PosX, int i_PosY)
 	{
 		m_ImageBase = loadSurface("ArtWork/White_Rook.png");
 	}
-
-	m_Rect.x = m_PosX;
-	m_Rect.y = m_PosY;
-	m_Rect.h = m_ImageBase->h;
-	m_Rect.w = m_ImageBase->w;
 }
 
 
@@ -25,14 +20,15 @@ Tour::~Tour()
 {
 }
 
+/*
 void Tour::Mouvement()
 {
 }
 
-//bool Tour::VerifMouvLegal()
-//{
-//	return true;
-//}
+bool Tour::VerifMouvLegal()
+{
+	return true;
+}
 
 bool Tour::Illuminer()
 {
@@ -42,3 +38,4 @@ bool Tour::Illuminer()
 void Tour::Detruire()
 {
 }
+*/
