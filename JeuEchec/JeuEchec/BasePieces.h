@@ -10,7 +10,7 @@ class Board;
 class BasePieces
 {
 public:
-	BasePieces(int i_PosX, int i_PosY);
+	BasePieces(bool i_Black, int i_PosX, int i_PosY);
 	~BasePieces();
 
 	
@@ -24,7 +24,7 @@ public:
 	SDL_Surface* loadSurface(std::string path);
 
 protected:
-	bool isBlack;
+	bool m_Black;
 	int m_PosX;
 	int m_PosY;
 	SDL_Surface* m_ImageBase = NULL;
