@@ -2,9 +2,10 @@
 #include <math.h>
 
 
-BasePieces::BasePieces(int i_PosX, int i_PosY)
+BasePieces::BasePieces(bool i_Black, int i_PosX, int i_PosY)
 	:m_PosX(i_PosX)
 	,m_PosY(i_PosY)
+	,m_Black(i_Black)
 {
 }
 
@@ -44,7 +45,7 @@ void BasePieces::Detruire()
 
 bool BasePieces::GetColor()
 {
-	return Noir;
+	return m_Black;
 }
 
 SDL_Surface* BasePieces::loadSurface(std::string path)
