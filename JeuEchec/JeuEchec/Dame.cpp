@@ -29,10 +29,10 @@ void Dame::Mouvement()
 {
 }
 
-bool Dame::VerifMouvLegal()
-{
-	return true;
-}
+//bool Dame::VerifMouvLegal()
+//{
+//	return true;
+//}
 
 bool Dame::Illuminer()
 {

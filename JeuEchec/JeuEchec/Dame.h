@@ -8,7 +8,7 @@ public:
 	~Dame();
 
 	void Mouvement() override;
-	bool VerifMouvLegal() override;
+	//bool VerifMouvLegal() override;
 	bool Illuminer() override;
 	void Detruire() override;
 };

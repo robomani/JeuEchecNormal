@@ -130,6 +130,7 @@
     <ClCompile Include="Pion.cpp" />
     <ClCompile Include="Roi.cpp" />
     <ClCompile Include="Tour.cpp" />
+    <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseCase.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Pion.h" />
     <ClInclude Include="Roi.h" />
     <ClInclude Include="Tour.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
