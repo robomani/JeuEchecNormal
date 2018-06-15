@@ -22,9 +22,86 @@ Fou::~Fou()
 
 void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX)
 {
+	//Bool that turn off when something is found by a for loop to stop looking in that direction.
+	bool plusXplusY = true;
+	bool minXminY = true;
+	bool plusXminY = true;
+	bool minXplusY = true;
 
+	for (int x = 1; x < 8; x++)
+	{
+		if (i_PosY + x < 8 && i_PosX + x < 8)
+		{
+			//Look for top right direction
+			if (plusXplusY && (i_Board.m_Cases[i_PosY + x][i_PosX + x]->m_Piece == nullptr))
+			{
+				i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true);
+			}
+			else if (plusXplusY && i_Board.m_Cases[i_PosY + x][i_PosX + x]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true);
+				plusXplusY = false;
+			}
+			else
+			{
+				plusXplusY = false;
+			}
+		}
 
+		if (i_PosY - x > -1 && i_PosX + x < 8)
+		{
+			//Look for bottom right direction
+			if (plusXminY && (i_Board.m_Cases[i_PosY - x][i_PosX + x]->m_Piece == nullptr))
+			{
+				i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true);
+			}
+			else if (plusXminY && i_Board.m_Cases[i_PosY - x][i_PosX + x]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true);
+				plusXminY = false;
+			}
+			else
+			{
+				plusXminY = false;
+			}
+		}
 
+		if (i_PosY + x < 8 && i_PosX - x > -1)
+		{
+			//look for top left direction
+			if (minXplusY && (i_Board.m_Cases[i_PosY + x][i_PosX - x]->m_Piece == nullptr))
+			{
+				i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true);
+			}
+			else if (minXplusY && i_Board.m_Cases[i_PosY + x][i_PosX - x]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true);
+				minXplusY = false;
+			}
+			else
+			{
+				minXplusY = false;
+			}
+		}
+
+		if (i_PosY - x > -1 && i_PosX - x > -1)
+		{
+			//Look for bottom left direction
+			if (minXminY && (i_Board.m_Cases[i_PosY - x][i_PosX - x]->m_Piece == nullptr))
+			{
+				i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true);
+			}
+			else if (minXminY && i_Board.m_Cases[i_PosY - x][i_PosX - x]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true);
+				minXminY = false;
+			}
+			else
+			{
+				minXminY = false;
+			}
+		}
+	}
 }
 
 /*
