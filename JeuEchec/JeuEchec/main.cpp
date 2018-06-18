@@ -32,7 +32,7 @@ SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 
 void Save(const std::vector<Turn>& iGameTurns, const bool i_Turn);
-bool Load(Board& i_Board);
+std::vector<Turn> Load(Board& i_Board, bool& i_Turn);
 void ChangeTurn(const float& i_TimePlayerWhite, const float& i_TimePlayerBlack, bool& i_PlayerTurn);
 
 
@@ -119,7 +119,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		TurnPlayerWhite = Load(m_Board);
+		gameTurns = Load(m_Board, TurnPlayerWhite);
 
 		//Main loop flag
 		bool quit = false;
@@ -270,20 +270,22 @@ void Save(const std::vector<Turn>& iGameTurns ,const bool i_Turn)
 	myfile.open("save.txt");
 	for each (Turn thisTurn in iGameTurns)
 	{
-		myfile << thisTurn.StartX << "\n" << thisTurn.StartY << "\n" << thisTurn.EndX << "\n" << thisTurn.EndY << "\n";
+		if (thisTurn.EndY != NULL)
+		{
+			myfile << thisTurn.StartX << "\n" << thisTurn.StartY << "\n" << thisTurn.EndX << "\n" << thisTurn.EndY << "\n";
+		}
 	}
-	myfile << i_Turn ? "w\n" : "b\n";
 	myfile.close();
 }
 
-bool Load(Board& i_Board)
+std::vector<Turn> Load(Board& i_Board, bool& i_Turn)
 {
 	std::vector<Turn> gameTurns;
 	Turn currentTurn;
 	std::string line;
 	std::ifstream myfile;
 	myfile.open("save.txt");
-	bool turn;
+
 
 	if (myfile.is_open())
 	{
@@ -291,39 +293,28 @@ bool Load(Board& i_Board)
 		
 		while (getline(myfile, line))
 		{
-			if (line == "w\n")
+			switch (i)
 			{
-				turn = true;
-			}
-			else if(line == "b\n")
-			{
-				turn = false;
-			}
-			else
-			{
-				switch (i)
-				{
-				case 0:
-					currentTurn.StartX = atoi(line.c_str());
-					i++;
-					break;
-				case 1:
-					currentTurn.StartY = atoi(line.c_str());
-					i++;
-					break;
-				case 2:
-					currentTurn.EndX = atoi(line.c_str());
-					i++;
-					break;
-				case 3:
-					currentTurn.EndY = atoi(line.c_str());
-					gameTurns.push_back(currentTurn);
-					i = 0;
-					break;
-				default:
+			case 0:
+				currentTurn.StartX = atoi(line.c_str());
+				i++;
 				break;
-				}
-			}
+			case 1:
+				currentTurn.StartY = atoi(line.c_str());
+				i++;
+				break;
+			case 2:
+				currentTurn.EndX = atoi(line.c_str());
+				i++;
+				break;
+			case 3:
+				currentTurn.EndY = atoi(line.c_str());
+				gameTurns.push_back(currentTurn);
+				i = 0;
+				break;
+			default:
+			break;
+			}	
 		}
 		myfile.close();
 		
@@ -341,7 +332,7 @@ bool Load(Board& i_Board)
 		i_Board.Render(gScreenSurface);
 		SDL_UpdateWindowSurface(gWindow);
 		SDL_Delay(1000);
+		i_Turn = !i_Turn;
 	}
-	
-	return turn;
+	return gameTurns;
 }
