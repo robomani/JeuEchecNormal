@@ -1,5 +1,11 @@
 #pragma once
+#include "Board.h"
+#include "BaseCase.h"
 #include "BasePieces.h"
+
+class Board;
+class BaseCase;
+
 class Fou :
 	public BasePieces
 {
