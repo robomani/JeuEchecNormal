@@ -20,7 +20,7 @@ Tour::~Tour()
 {
 }
 
-void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX)
+void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable)
 {
 	//Bool that turn false when a object or a border is found to stop the check in that direction.
 	bool checkRight = true;
@@ -35,12 +35,27 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			//Look for right direction
 			if (checkRight && (i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece == nullptr))
 			{
-				i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
+				}
 			}
 			else if (checkRight && i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece->IsBlack() != IsBlack())
 			{
-				i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
-				checkRight = false;
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+					checkRight = false;
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
+					checkRight = false;
+				}
 			}
 			else
 			{
@@ -53,12 +68,27 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			//Look for left direction
 			if (checkLeft && (i_Board.m_Cases[i_PosY][i_PosX - x]->m_Piece == nullptr))
 			{
-				i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY][i_PosX - x]->SetVulnerability(true);
+				}
 			}
 			else if (checkLeft && i_Board.m_Cases[i_PosY][i_PosX - x]->m_Piece->IsBlack() != IsBlack())
 			{
-				i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
-				checkLeft = false;
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+					checkLeft = false;
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY][i_PosX - x]->SetVulnerability(true);
+					checkLeft = false;
+				}
 			}
 			else
 			{
@@ -71,12 +101,27 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			//look for top direction
 			if (checkTop && (i_Board.m_Cases[i_PosY + x][i_PosX]->m_Piece == nullptr))
 			{
-				i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY + x][i_PosX]->SetVulnerability(true);
+				}
 			}
 			else if (checkTop && i_Board.m_Cases[i_PosY + x][i_PosX]->m_Piece->IsBlack() != IsBlack())
 			{
-				i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
-				checkTop = false;
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+					checkTop = false;
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY + x][i_PosX]->SetVulnerability(true);
+					checkTop = false;
+				}
 			}
 			else
 			{
@@ -89,12 +134,27 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			//Look for bottom direction
 			if (checkBottom && (i_Board.m_Cases[i_PosY - x][i_PosX]->m_Piece == nullptr))
 			{
-				i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY - x][i_PosX]->SetVulnerability(true);
+				}
 			}
 			else if (checkBottom && i_Board.m_Cases[i_PosY - x][i_PosX]->m_Piece->IsBlack() != IsBlack())
 			{
-				i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
-				checkBottom = false;
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+					checkBottom = false;
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY - x][i_PosX]->SetVulnerability(true);
+					checkBottom = false;
+				}
 			}
 			else
 			{

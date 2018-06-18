@@ -29,8 +29,12 @@ void Roi::Mouvement()
 {
 }
 
-bool Roi::VerifMouvLegal()
+bool Roi::LightPossibleMoves()
 {
+	if(possible move != vulnérable)
+	{
+		Case[y][x].SetAlight(true);
+	}
 	return true;
 }
 

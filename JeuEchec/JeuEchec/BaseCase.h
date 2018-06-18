@@ -15,6 +15,7 @@ public:
 	~BaseCase();
 
 	bool isAlight;
+	bool isVulnerable;
 	int PosX;
 	int PosY;
 	BasePieces* m_Piece;
@@ -24,6 +25,7 @@ public:
 
 	//La bool determine si l'on veut que la case soit illuminer
 	void SetCaseLight(bool i_toLight);
+	void SetVulnerability(bool i_Vulnerability);
 	void Render(SDL_Surface* gScreenSurface);
 };
 

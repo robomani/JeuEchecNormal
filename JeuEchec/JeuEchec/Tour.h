@@ -11,7 +11,7 @@ public:
 	~Tour();
 
 
-	void LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX);
+	void LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable);
 	/*
 	bool Bouger = false;
 

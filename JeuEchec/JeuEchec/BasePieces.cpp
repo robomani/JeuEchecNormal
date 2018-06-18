@@ -13,7 +13,7 @@ BasePieces::~BasePieces()
 {
 }
 
-void BasePieces::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX)
+void BasePieces::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
 {
 
 }

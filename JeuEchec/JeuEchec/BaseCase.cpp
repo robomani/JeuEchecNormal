@@ -25,6 +25,11 @@ void BaseCase::SetCaseLight(bool i_toLight)
 	isAlight = i_toLight;
 }
 
+void BaseCase::SetVulnerability(bool i_Vulnerability)
+{
+	isVulnerable = i_Vulnerability;
+}
+
 SDL_Surface* BaseCase::loadSurface(std::string path)
 {
 	return IMG_Load(path.c_str());

@@ -16,7 +16,8 @@ public:
 	bool hasMoved = false;
 	bool Selected;
 
-	virtual void LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX);
+
+	virtual void LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable);
 	virtual void Mouvement();
 	virtual void Destroy();
 	void Render(SDL_Surface* gScreenSurface, SDL_Rect* a_CaseRect);
@@ -27,4 +28,3 @@ protected:
 	bool m_Black;
 	SDL_Surface* m_ImageBase = NULL;
 };
-

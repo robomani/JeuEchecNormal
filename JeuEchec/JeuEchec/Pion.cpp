@@ -33,7 +33,7 @@ void Pion::Mouvement()
 {
 }
 
-void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX)
+void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
 {
 	int directionY = 1;
 
@@ -45,7 +45,10 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 	//Look for one case movement
 	if (i_Board.m_Cases[i_PosY + directionY][i_PosX]->m_Piece == nullptr)
 	{
-		i_Board.m_Cases[i_PosY + directionY][i_PosX]->SetCaseLight(true);
+		if (!i_Vulnerable)
+		{
+			i_Board.m_Cases[i_PosY + directionY][i_PosX]->SetCaseLight(true);
+		}
 	}
 	
 	
@@ -54,7 +57,10 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 	{
 		if (i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->m_Piece == nullptr)
 		{
-			i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->SetCaseLight(true);
+			if (!i_Vulnerable)
+			{
+				i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->SetCaseLight(true);
+			}
 		}
 	}
 	
@@ -62,22 +68,39 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 	//Look For a enemy left/fwrd or right/fwrd
 	if (i_PosX < 7)
 	{
-		if (i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece != nullptr)
+
+		if (i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece != nullptr || i_Vulnerable)
 		{
-			if (i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece->IsBlack() != IsBlack())
+			if (i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece == nullptr 
+			|| i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece->IsBlack() != IsBlack())
 			{
-				i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetCaseLight(true);
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetCaseLight(true);
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetVulnerability(true);
+				}
 			}
 		}
 	}
 	
 	if (i_PosX > 0)
 	{
-		if (i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece != nullptr)
+		if (i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece != nullptr || i_Vulnerable)
 		{
-			if (i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece->IsBlack() != IsBlack())
+			if (i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece == nullptr 
+			|| i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece->IsBlack() != IsBlack())
 			{
-				i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetCaseLight(true);
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetCaseLight(true);
+				}
+				else
+				{
+					i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetVulnerability(true);
+				}
 			}
 		}
 	}
