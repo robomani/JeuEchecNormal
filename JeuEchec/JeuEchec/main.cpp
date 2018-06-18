@@ -31,8 +31,8 @@ SDL_Window* gWindow = NULL;
 //The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
 
-void Save(std::vector<Turn>& iGameTurns);
-std::vector<Turn> Load();
+void Save(const std::vector<Turn>& iGameTurns, const bool i_Turn);
+std::vector<Turn> Load(Board& i_Board, bool& i_Turn);
 void ChangeTurn(const float& i_TimePlayerWhite, const float& i_TimePlayerBlack, bool& i_PlayerTurn);
 
 
@@ -119,7 +119,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		gameTurns = Load();
+		gameTurns = Load(m_Board, TurnPlayerWhite);
 
 		//Main loop flag
 		bool quit = false;
@@ -139,17 +139,18 @@ int main(int argc, char* args[])
 			{
 				if (e.type == SDL_QUIT)
 				{
-					Save(gameTurns);
+					Save(gameTurns, TurnPlayerWhite);
 					quit = true;
 				}
 				if (e.type == SDL_KEYDOWN)
 				{
-					Save(gameTurns);
+					Save(gameTurns, TurnPlayerWhite);
+					delete selectedPiece;
 					quit = true;
 				}
 				if (e.type == SDL_MOUSEBUTTONDOWN)
 				{
-					if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece != nullptr)
+					if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece != nullptr && m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece->IsBlack() == !TurnPlayerWhite)
 					{
 						selectedPiece = m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)];
 						std::cout << "Case X = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosX << " Y = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosY << std::endl;
@@ -263,27 +264,33 @@ void ChangeTurn(const float& i_TimePlayerWhite,const float& i_TimePlayerBlack, b
 	std::cout << "Time for player White : " << i_TimePlayerWhite << " / Time for player Black :  " << i_TimePlayerBlack << std::endl;
 }
 
-void Save(std::vector<Turn>& iGameTurns)
+void Save(const std::vector<Turn>& iGameTurns ,const bool i_Turn)
 {
 	std::ofstream myfile;
 	myfile.open("save.txt");
 	for each (Turn thisTurn in iGameTurns)
 	{
-		myfile << thisTurn.StartX << "\n" << thisTurn.StartY << "\n" << thisTurn.EndX << "\n" << thisTurn.EndY << "\n";
+		if (thisTurn.EndY != NULL)
+		{
+			myfile << thisTurn.StartX << "\n" << thisTurn.StartY << "\n" << thisTurn.EndX << "\n" << thisTurn.EndY << "\n";
+		}
 	}
 	myfile.close();
 }
 
-std::vector<Turn> Load()
+std::vector<Turn> Load(Board& i_Board, bool& i_Turn)
 {
 	std::vector<Turn> gameTurns;
 	Turn currentTurn;
 	std::string line;
 	std::ifstream myfile;
 	myfile.open("save.txt");
+
+
 	if (myfile.is_open())
 	{
 		int i = 0;
+		
 		while (getline(myfile, line))
 		{
 			switch (i)
@@ -306,10 +313,26 @@ std::vector<Turn> Load()
 				i = 0;
 				break;
 			default:
-				break;
-			}
+			break;
+			}	
 		}
 		myfile.close();
+		
+	}
+	
+	for each (Turn t in gameTurns)
+	{
+		if (i_Board.m_Cases[t.EndY][t.EndX]->m_Piece)
+		{
+			delete i_Board.m_Cases[t.EndY][t.EndX]->m_Piece;
+		}
+		i_Board.m_Cases[t.EndY][t.EndX]->m_Piece = i_Board.m_Cases[t.StartY][t.StartX]->m_Piece;
+		i_Board.m_Cases[t.EndY][t.EndX]->m_Piece->hasMoved = true;
+		i_Board.m_Cases[t.StartY][t.StartX]->m_Piece = nullptr;
+		i_Board.Render(gScreenSurface);
+		SDL_UpdateWindowSurface(gWindow);
+		SDL_Delay(1000);
+		i_Turn = !i_Turn;
 	}
 	return gameTurns;
 }
