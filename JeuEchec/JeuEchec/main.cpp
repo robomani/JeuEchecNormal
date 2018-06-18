@@ -102,7 +102,7 @@ int main(int argc, char* args[])
 {
 	float timePlayerWhite = 0;
 	float timePlayerBlack = 0;
-	bool TurnPlayerWhite = true;
+	bool TurnPlayerBlack = false;
 	Board m_Board = Board();
 	BaseCase* selectedPiece = nullptr;
 	std::vector<Turn> gameTurns;
@@ -119,7 +119,7 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		gameTurns = Load(m_Board, TurnPlayerWhite);
+		gameTurns = Load(m_Board, TurnPlayerBlack);
 
 		//Main loop flag
 		bool quit = false;
@@ -139,18 +139,18 @@ int main(int argc, char* args[])
 			{
 				if (e.type == SDL_QUIT)
 				{
-					Save(gameTurns, TurnPlayerWhite);
+					Save(gameTurns, TurnPlayerBlack);
 					quit = true;
 				}
 				if (e.type == SDL_KEYDOWN)
 				{
-					Save(gameTurns, TurnPlayerWhite);
+					Save(gameTurns, TurnPlayerBlack);
 					delete selectedPiece;
 					quit = true;
 				}
 				if (e.type == SDL_MOUSEBUTTONDOWN)
 				{
-					if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece != nullptr && m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece->IsBlack() == !TurnPlayerWhite)
+					if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece != nullptr && m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece->IsBlack() == TurnPlayerBlack)
 					{
 						selectedPiece = m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)];
 						std::cout << "Case X = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosX << " Y = " << m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->PosY << std::endl;
@@ -184,7 +184,27 @@ int main(int argc, char* args[])
 							selectedPiece->m_CaseRect.x = currentTurn.StartX * 50;
 							selectedPiece->m_CaseRect.y = currentTurn.StartY * 50;
 							selectedPiece = nullptr;
-							ChangeTurn(timePlayerWhite, timePlayerBlack, TurnPlayerWhite);
+							ChangeTurn(timePlayerWhite, timePlayerBlack, TurnPlayerBlack);
+							for (int i = 0; i < m_Board.m_Cases.size(); i++)
+							{
+								for (int x = 0; x < m_Board.m_Cases[i].size(); x++)
+								{
+									m_Board.m_Cases[i][x]->SetVulnerability(false);
+								}
+
+							}
+
+							for (int i = 0; i < m_Board.m_Cases.size(); i++)
+							{
+								for (int x = 0; x < m_Board.m_Cases[i].size(); x++)
+								{
+									if (m_Board.m_Cases[i][x]->m_Piece != nullptr && m_Board.m_Cases[i][x]->m_Piece->IsBlack() != TurnPlayerBlack)
+									{
+										m_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(m_Board, i, x, true);
+									}
+								}
+
+							}
 						}
 						else
 						{
@@ -213,7 +233,7 @@ int main(int argc, char* args[])
 
 
 				
-				if (TurnPlayerWhite)
+				if (!TurnPlayerBlack)
 				{
 					timePlayerWhite = (clock() - startTime) / 1000;
 				}
@@ -243,7 +263,10 @@ int main(int argc, char* args[])
 			}
 			//Apply the PNG image
 			m_Board.Render(gScreenSurface);
-
+			if (selectedPiece != nullptr)
+			{
+				m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
+			}
 
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
