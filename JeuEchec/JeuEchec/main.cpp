@@ -220,7 +220,6 @@ int main(int argc, char* args[])
 							{
 								m_Board.m_Cases[i][x]->SetCaseLight(false);
 							}
-
 						}
 					}
 				}
@@ -266,6 +265,7 @@ int main(int argc, char* args[])
 			if (selectedPiece != nullptr)
 			{
 				m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
+				std::cout << "Render";
 			}
 
 			//Update the surface
