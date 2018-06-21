@@ -106,12 +106,14 @@ int main(int argc, char* args[])
 	float timePlayerWhite = 0;
 	float timePlayerBlack = 0;
 	bool TurnPlayerBlack = false;
+	bool gameEnded = false;
 	Board m_Board = Board();
 	BaseCase* selectedPiece = nullptr;
 	std::vector<Turn> gameTurns;
 	Turn currentTurn;
 	clock_t startTime = clock(); //Start timer
-	
+	SDL_Surface* m_WinScreen = nullptr;
+
 	//std::vector<Vector2> ValidMove; 
 
 	
@@ -172,8 +174,8 @@ int main(int argc, char* args[])
 					{
 						if (mousePosY >= 400 || mousePosX >= 400)
 						{
-							
-					
+
+
 						}
 						if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->isAlight)
 						{
@@ -183,6 +185,18 @@ int main(int argc, char* args[])
 							currentTurn.EndY = floor(mousePosY / 50);
 							if (m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece)
 							{
+								if (m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece->isKing)
+								{
+									if (TurnPlayerBlack)
+									{
+										m_WinScreen = IMG_Load("ArtWork/PlayerBlackWin.png");
+									}
+									else
+									{
+										m_WinScreen = IMG_Load("ArtWork/PlayerWhiteWin.png");
+									}
+									gameEnded = true;
+								}
 								delete m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece;
 							}
 							m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece = selectedPiece->m_Piece;
@@ -244,7 +258,7 @@ int main(int argc, char* args[])
 				}
 
 
-				
+
 				if (!TurnPlayerBlack)
 				{
 					timePlayerWhite = (clock() - startTime) / 1000;
@@ -253,7 +267,7 @@ int main(int argc, char* args[])
 				{
 					timePlayerBlack = (clock() - startTime) / 1000;
 				}
-				
+
 			}
 
 			//Show mouse position X and Y
@@ -262,24 +276,30 @@ int main(int argc, char* args[])
 			if (isButtonDown)
 			{
 				//std::cout << "True" << std::endl;
-				if (mousePosY < 400-25 && mousePosX < 400-25 && selectedPiece != nullptr)
+				if (mousePosY < 400 - 25 && mousePosX < 400 - 25 && selectedPiece != nullptr)
 				{
-					selectedPiece->m_CaseRect.x = mousePosX -25;
-					selectedPiece->m_CaseRect.y = mousePosY -25;
+					selectedPiece->m_CaseRect.x = mousePosX - 25;
+					selectedPiece->m_CaseRect.y = mousePosY - 25;
 				}
-				
+
 			}
 			else
 			{
-				
+
 			}
 			//Apply the PNG image
-			m_Board.Render(gScreenSurface);
-			if (selectedPiece != nullptr)
+			if (!gameEnded)
 			{
-				m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
+				m_Board.Render(gScreenSurface);
+				if (selectedPiece != nullptr)
+				{
+					m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
+				}
 			}
-
+			else
+			{
+				SDL_BlitSurface(m_WinScreen, NULL, gScreenSurface, NULL);
+			}
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
 		}
