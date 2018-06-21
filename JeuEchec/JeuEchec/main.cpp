@@ -69,6 +69,9 @@ bool init()
 			{
 				//Get window surface
 				gScreenSurface = SDL_GetWindowSurface(gWindow);
+				SDL_WarpMouseInWindow(gWindow, 200, 200);
+
+
 			}
 		}
 	}
@@ -108,9 +111,10 @@ int main(int argc, char* args[])
 	std::vector<Turn> gameTurns;
 	Turn currentTurn;
 	clock_t startTime = clock(); //Start timer
+	
 	//std::vector<Vector2> ValidMove; 
 
-
+	
 
 	//Start up SDL and create window
 	if (!init())
@@ -166,7 +170,11 @@ int main(int argc, char* args[])
 
 					if (selectedPiece != nullptr)
 					{
-
+						if (mousePosY >= 400 || mousePosX >= 400)
+						{
+							
+					
+						}
 						if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->isAlight)
 						{
 							selectedPiece->PosY = floor(mousePosY / 50);
@@ -228,6 +236,10 @@ int main(int argc, char* args[])
 					int x = 0;
 					int y = 0;
 					SDL_GetMouseState(&mousePosX, &mousePosY);
+					if (mousePosX < 0 || mousePosX > 400 || mousePosY < 0 || mousePosY > 400)
+					{
+						SDL_WarpMouseInWindow(gWindow, 200, 200);
+					}
 				}
 
 
@@ -249,7 +261,7 @@ int main(int argc, char* args[])
 			if (isButtonDown)
 			{
 				//std::cout << "True" << std::endl;
-				if (selectedPiece != nullptr)
+				if (mousePosY < 400-25 && mousePosX < 400-25 && selectedPiece != nullptr)
 				{
 					selectedPiece->m_CaseRect.x = mousePosX -25;
 					selectedPiece->m_CaseRect.y = mousePosY -25;
