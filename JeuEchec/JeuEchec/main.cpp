@@ -242,7 +242,6 @@ int main(int argc, char* args[])
 							{
 								m_Board.m_Cases[i][x]->SetCaseLight(false);
 							}
-
 						}
 					}
 				}
@@ -298,7 +297,12 @@ int main(int argc, char* args[])
 			}
 			else
 			{
+<<<<<<< HEAD
 				SDL_BlitSurface(m_WinScreen, NULL, gScreenSurface, NULL);
+=======
+				m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
+				std::cout << "Render";
+>>>>>>> remotes/origin/master
 			}
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);

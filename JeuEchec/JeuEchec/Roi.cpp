@@ -56,6 +56,14 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 									{
 										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
 									}
+								}	
+								else if (i_Board.m_Cases[i_PosY + y][i_PosX + x]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY + y][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
+									{
+										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
+									}
 								}
 							}
 						}
@@ -74,6 +82,14 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										}
 									}
 									else
+									{
+										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
+									}
+								}
+								else if (i_Board.m_Cases[i_PosY + y][i_PosX + x]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY + y][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
 									{
 										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
 									}
@@ -107,6 +123,14 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
 									}
 								}
+								else if (i_Board.m_Cases[i_PosY + y][i_PosX + x]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY + y][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
+									{
+										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
+									}
+								}
 							}
 						}
 						else if (y > 0)
@@ -124,6 +148,14 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										}
 									}
 									else
+									{
+										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
+									}
+								}
+								else if (i_Board.m_Cases[i_PosY + y][i_PosX + x]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY + y][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
 									{
 										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
 									}
