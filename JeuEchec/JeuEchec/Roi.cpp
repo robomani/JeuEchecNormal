@@ -34,7 +34,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				//Prevent look outside the Grid in negative X axis.
 				if (x <= 0)
 				{
-					if (i_PosX > 0)
+					if (i_PosX >= 0)
 					{
 						//Prevent look outside the Grid in Y axis.
 						if (y <= 0)
@@ -121,7 +121,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 								}
 							}
 						}
-					}
+					}					
 					else if (i_PosX == 0)
 					{
 						//Prevent look outside the Grid in Y axis.
@@ -209,7 +209,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 								}
 							}
 						}
-					}
+					}					
 				}
 				//Prevent look outside the Grid in positive X axis.
 				else if (x > 0)
