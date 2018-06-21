@@ -200,11 +200,6 @@ bool Game()
 
 					if (selectedPiece != nullptr)
 					{
-						if (mousePosY >= 400 || mousePosX >= 400)
-						{
-
-
-						}
 						if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->isAlight)
 						{
 							selectedPiece->PosY = floor(mousePosY / 50);

@@ -17,6 +17,7 @@ public:
 	void Promotion();
 	void Mouvement();
 	void LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable);
+	bool IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX);
 	void Destroy();
 };
 

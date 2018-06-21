@@ -49,7 +49,10 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY + directionY][i_PosX]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + directionY, i_PosX))
+				{
+					i_Board.m_Cases[i_PosY + directionY][i_PosX]->SetCaseLight(true);
+				}
 			}
 		}
 	}
@@ -61,7 +64,10 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + directionY + directionY, i_PosX))
+				{
+					i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->SetCaseLight(true);
+				}
 			}
 		}
 	}
@@ -79,7 +85,10 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 				{
 					if (!i_Vulnerable)
 					{
-						i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetCaseLight(true);
+						if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + directionY, i_PosX + 1))
+						{
+							i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetCaseLight(true);
+						}
 					}
 					else
 					{
@@ -106,7 +115,10 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 				{
 					if (!i_Vulnerable)
 					{
-						i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetCaseLight(true);
+						if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + directionY, i_PosX - 1))
+						{
+							i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetCaseLight(true);
+						}
 					}
 					else
 					{
@@ -124,6 +136,11 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 			}
 		}
 	}
+}
+
+bool Pion::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+{
+	return BasePieces::IsKingVulnerableAtPos(i_Board, i_PreviousPosY, i_PreviousPosX, i_PosY, i_PosX);
 }
 
 void Pion::Destroy()

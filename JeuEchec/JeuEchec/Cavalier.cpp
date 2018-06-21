@@ -29,7 +29,10 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - 2, i_PosX - 1))
+				{
+					i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->SetCaseLight(true);
+				}
 			}
 			else
 			{
@@ -53,7 +56,10 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - 2, i_PosX + 1))
+				{
+					i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->SetCaseLight(true);
+				}
 			}
 			else
 			{
@@ -77,7 +83,10 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + 1, i_PosX + 2))
+				{
+					i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->SetCaseLight(true);
+				}
 			}
 			else
 			{
@@ -101,7 +110,10 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + 1, i_PosX + 2))
+				{
+					i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->SetCaseLight(true);
+				}
 			}
 			else
 			{
@@ -125,7 +137,10 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + 2, i_PosX + 1))
+				{
+					i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->SetCaseLight(true);
+				}
 			}
 			else
 			{
@@ -149,7 +164,10 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + 2, i_PosX - 1))
+				{
+					i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->SetCaseLight(true);
+				}
 			}
 			else
 			{
@@ -173,7 +191,10 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + 1, i_PosX - 2))
+				{
+					i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->SetCaseLight(true);
+				}
 			}
 			else
 			{
@@ -197,7 +218,10 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->SetCaseLight(true);
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - 1, i_PosX - 2))
+				{
+					i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->SetCaseLight(true);
+				}
 			}
 			else
 			{
@@ -213,6 +237,11 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 			} 
 		}
 	}
+}
+
+bool Cavalier::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+{
+	return BasePieces::IsKingVulnerableAtPos(i_Board, i_PreviousPosY, i_PreviousPosX, i_PosY, i_PosX);
 }
 
 /*

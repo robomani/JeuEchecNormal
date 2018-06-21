@@ -37,7 +37,10 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			{
 				if (!i_Vulnerable)
 				{
-					i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX + x))
+					{
+						i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+					}
 				}
 				else
 				{
@@ -59,7 +62,10 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 
 				if (!i_Vulnerable)
 				{
-					i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX + x))
+					{
+						i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+					}
 				}
 				else
 				{
@@ -75,7 +81,10 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			{
 				if (!i_Vulnerable)
 				{
-					i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX - x))
+					{
+						i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+					}
 				}
 				else
 				{
@@ -95,7 +104,10 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			{
 				if (!i_Vulnerable)
 				{
-					i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX - x))
+					{
+						i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+					}
 					checkLeft = false;
 				}
 				else
@@ -113,7 +125,10 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			{
 				if (!i_Vulnerable)
 				{
-					i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX))
+					{
+						i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+					}
 				}
 				else
 				{
@@ -134,7 +149,10 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			{
 				if (!i_Vulnerable)
 				{
-					i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX))
+					{
+						i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+					}
 					checkTop = false;
 				}
 				else
@@ -152,7 +170,10 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			{
 				if (!i_Vulnerable)
 				{
-					i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX))
+					{
+						i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+					}
 				}
 				else
 				{
@@ -173,7 +194,10 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			{
 				if (!i_Vulnerable)
 				{
-					i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX))
+					{
+						i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+					}
 					checkBottom = false;
 				}
 				else
@@ -184,4 +208,9 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 			}
 		}
 	}
+}
+
+bool Tour::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+{
+	return BasePieces::IsKingVulnerableAtPos(i_Board, i_PreviousPosY, i_PreviousPosX, i_PosY, i_PosX);
 }

@@ -1,5 +1,6 @@
 #include "BasePieces.h"
 #include "Board.h"
+#include "Roi.h"
 #include <math.h>
 
 
@@ -16,6 +17,64 @@ BasePieces::~BasePieces()
 void BasePieces::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
 {
 
+}
+
+bool BasePieces::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+{
+	bool isKingVulnerable = false;
+	BasePieces* previousPiece = nullptr;
+
+	if (i_Board.m_Cases[i_PosY][i_PosX]->m_Piece != nullptr)
+	{
+		previousPiece = i_Board.m_Cases[i_PosY][i_PosX]->m_Piece;
+	}
+
+	i_Board.m_Cases[i_PosY][i_PosX]->m_Piece = i_Board.m_Cases[i_PreviousPosY][i_PreviousPosX]->m_Piece;
+	i_Board.m_Cases[i_PreviousPosY][i_PreviousPosX]->m_Piece = nullptr;
+
+
+
+	for (int i = 0; i < i_Board.m_Cases.size(); i++)
+	{
+		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
+		{
+			i_Board.m_Cases[i][x]->isVulnerable = false;
+			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(i_Board, i, x, true);
+			}
+		}
+	}
+
+	for (int i = 0; i < i_Board.m_Cases.size(); i++)
+	{
+		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
+		{
+			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->isKing)
+			{
+				if (i_Board.m_Cases[i][x]->m_Piece->IsBlack() == IsBlack())
+				{
+					isKingVulnerable = i_Board.m_Cases[i][x]->isVulnerable;
+				}
+			}
+		}
+	}
+
+	i_Board.m_Cases[i_PreviousPosY][i_PreviousPosX]->m_Piece = i_Board.m_Cases[i_PosY][i_PosX]->m_Piece;
+	i_Board.m_Cases[i_PosY][i_PosX]->m_Piece = previousPiece;
+	for (int i = 0; i < i_Board.m_Cases.size(); i++)
+	{
+		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
+		{
+			i_Board.m_Cases[i][x]->isVulnerable = false;
+			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
+			{
+				i_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(i_Board, i, x, true);
+			}
+		}
+	}
+
+	return isKingVulnerable;
 }
 
 void BasePieces::Mouvement()
