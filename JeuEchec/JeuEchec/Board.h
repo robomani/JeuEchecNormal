@@ -3,6 +3,7 @@
 #include <vector>
 #include "BaseCase.h"
 #include "BasePieces.h"
+#include <memory>
 
 //class BaseCase;
 
@@ -18,7 +19,7 @@ public:
 	int m_Height;
 	int m_Width;
 
-	std::vector<std::vector<BaseCase*>> m_Cases;
+	std::vector<std::vector<std::shared_ptr<BaseCase>>> m_Cases;
 	//BasePieces* m_PiecesInGame[2][16];
 
 	void initialisation();

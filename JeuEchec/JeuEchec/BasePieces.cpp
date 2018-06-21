@@ -13,6 +13,8 @@ BasePieces::BasePieces(bool i_Black)
 
 BasePieces::~BasePieces()
 {
+	SDL_FreeSurface(m_ImageBase);
+	delete(m_ImageBase);
 }
 
 void BasePieces::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
@@ -23,7 +25,7 @@ void BasePieces::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const
 bool BasePieces::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
 {
 	bool isKingVulnerable = false;
-	BasePieces* previousPiece = nullptr;
+	std::shared_ptr<BasePieces> previousPiece = nullptr;
 
 	if (i_Board.m_Cases[i_PosY][i_PosX]->m_Piece != nullptr)
 	{

@@ -18,19 +18,8 @@ Board::Board()
 
 Board::~Board()
 {
-	for each (std::vector<BaseCase*> vectorOfVector in m_Cases)
-	{
-		for each (BaseCase* pointerOfBaseCase in vectorOfVector)
-		{
-			if (pointerOfBaseCase->m_Piece != nullptr)
-			{
-				delete pointerOfBaseCase->m_Piece;
-				pointerOfBaseCase->m_Piece = nullptr;
-			}
-			delete pointerOfBaseCase;
-			pointerOfBaseCase = nullptr;
-		}
-	}
+	SDL_FreeSurface(m_BoardSurface);
+	delete(m_BoardSurface);
 }
 
 
@@ -38,50 +27,50 @@ void Board::initialisation()
 {
 	for (int i = 0; i < 8; i++)
 	{
-		m_Cases.push_back(std::vector<BaseCase*>());
+		m_Cases.push_back(std::vector<std::shared_ptr<BaseCase>>());
 		for (int x = 0; x < 8; x++)
 		{
-			if (i ==0 || i == 7)
+			if (i == 0 || i == 7)
 			{
 				switch (x)
 				{
 				case 0:
-					m_Cases[i].push_back(new BaseCase(x, i, new Tour(i)));
+					m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Tour>(i)));
 					break;
 				case 1:
-					m_Cases[i].push_back(new BaseCase(x, i, new Cavalier(i)));
+					m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Cavalier>(i)));
 					break;
 				case 2:
-					m_Cases[i].push_back(new BaseCase(x, i, new Fou(i)));
+					m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Fou>(i)));
 					break;
 				case 3:
-					m_Cases[i].push_back(new BaseCase(x, i, new Dame(i)));
+					m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Dame>(i)));
 					break;
 				case 4:
-					m_Cases[i].push_back(new BaseCase(x, i, new Roi(i)));
+					m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Roi>(i)));
 					break;
 				case 5:
-					m_Cases[i].push_back(new BaseCase(x, i, new Fou(i)));
+					m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Fou>(i)));
 					break;
 				case 6:
-					m_Cases[i].push_back(new BaseCase(x, i, new Cavalier(i)));
+					m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Cavalier>(i)));
 					break;
 				case 7:
-					m_Cases[i].push_back(new BaseCase(x, i, new Tour(i)));
+					m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Tour>(i)));
 					break;
 				}
 			}
-			else if(i == 1)
+			else if (i == 1)
 			{
-				m_Cases[i].push_back(new BaseCase(x, i, new Pion(0)));
+				m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Pion>(0)));
 			}
 			else if (i == 6)
 			{
-				m_Cases[i].push_back(new BaseCase(x, i, new Pion(1)));
+				m_Cases[i].push_back(std::make_shared<BaseCase>(x, i, std::make_shared<Pion>(1)));
 			}
 			else
 			{
-				m_Cases[i].push_back(new BaseCase(x, i));
+				m_Cases[i].push_back(std::make_shared<BaseCase>(x, i));
 			}
 		}
 	}

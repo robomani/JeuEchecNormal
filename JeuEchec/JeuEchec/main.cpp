@@ -32,7 +32,7 @@ SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 
 void Save(const std::vector<Turn>& iGameTurns, const bool i_Turn);
-std::vector<Turn> Load(Board& i_Board, bool& i_Turn);
+std::vector<Turn> Load(Board& i_Board, bool i_Turn, bool i_Fast);
 void ChangeTurn(const float& i_TimePlayerWhite, const float& i_TimePlayerBlack, bool& i_PlayerTurn);
 bool Game();
 
@@ -114,6 +114,9 @@ int main(int argc, char* args[])
 
 		} while (Game());
 	}
+	SDL_FreeSurface(gScreenSurface);
+	delete gScreenSurface;
+	delete gWindow;
 	return 0;
 }
 
@@ -124,7 +127,7 @@ bool Game()
 	bool TurnPlayerBlack = false;
 	bool gameEnded = false;
 	Board m_Board = Board();
-	BaseCase* selectedPiece = nullptr;
+	std::shared_ptr<BaseCase> selectedPiece = nullptr;
 	std::vector<Turn> gameTurns;
 	Turn currentTurn;
 	clock_t startTime = clock(); //Start timer
@@ -136,7 +139,7 @@ bool Game()
 
 	//Start up SDL and create window
 	
-		gameTurns = Load(m_Board, TurnPlayerBlack);
+		
 
 		//Main loop flag
 		bool quit = false;
@@ -157,16 +160,14 @@ bool Game()
 				if (e.type == SDL_QUIT)
 				{
 					Save(gameTurns, TurnPlayerBlack);
-					delete selectedPiece;
+					SDL_FreeSurface(m_WinScreen);
 					delete m_WinScreen;
-					quit = true;
-					return false;
 				}
 				//Quit en appuillant sur ESC
 				if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				{
 					Save(gameTurns, TurnPlayerBlack);
-					delete selectedPiece;
+					SDL_FreeSurface(m_WinScreen);
 					delete m_WinScreen;
 					quit = true;
 					return false;
@@ -177,11 +178,23 @@ bool Game()
 					std::ofstream myfile;
 					myfile.open("save.txt", std::ofstream::out | std::ofstream::trunc);
 					myfile.close();
-					delete selectedPiece;
 					delete m_WinScreen;
 					return true;
 
 				}
+				//Load en appuillant sur L
+				if (e.key.keysym.scancode == SDL_SCANCODE_L)
+				{
+					gameTurns = Load(m_Board, TurnPlayerBlack, false);
+
+				}
+				//Fast foward en apuillant sur F
+				if (e.key.keysym.scancode == SDL_SCANCODE_F)
+				{
+					gameTurns = Load(m_Board, TurnPlayerBlack, true);
+
+				}
+
 				if (e.type == SDL_MOUSEBUTTONDOWN)
 				{
 					if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece != nullptr && m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->m_Piece->IsBlack() == TurnPlayerBlack)
@@ -219,8 +232,7 @@ bool Game()
 										m_WinScreen = IMG_Load("ArtWork/PlayerWhiteWin.png");
 									}
 									gameEnded = true;
-								}
-								delete m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece;
+								}								
 							}
 							m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece = selectedPiece->m_Piece;
 							selectedPiece->m_Piece->hasMoved = true;
@@ -243,7 +255,7 @@ bool Game()
 							{
 								for (int x = 0; x < m_Board.m_Cases[i].size(); x++)
 								{
-									if (m_Board.m_Cases[i][x]->m_Piece != nullptr && m_Board.m_Cases[i][x]->m_Piece->IsBlack() != TurnPlayerBlack)
+									if (m_Board.m_Cases[i][x]->m_Piece != nullptr && m_Board.m_Cases[i][x]->m_Piece->IsBlack() == TurnPlayerBlack)
 									{
 										m_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(m_Board, i, x, true);
 									}
@@ -352,7 +364,7 @@ void Save(const std::vector<Turn>& iGameTurns ,const bool i_Turn)
 	myfile.close();
 }
 
-std::vector<Turn> Load(Board& i_Board, bool& i_Turn)
+std::vector<Turn> Load(Board& i_Board, bool i_Turn, bool i_Fast)
 {
 	std::vector<Turn> gameTurns;
 	Turn currentTurn;
@@ -399,16 +411,19 @@ std::vector<Turn> Load(Board& i_Board, bool& i_Turn)
 	
 	for each (Turn t in gameTurns)
 	{
-		if (i_Board.m_Cases[t.EndY][t.EndX]->m_Piece)
-		{
-			delete i_Board.m_Cases[t.EndY][t.EndX]->m_Piece;
-		}
 		i_Board.m_Cases[t.EndY][t.EndX]->m_Piece = i_Board.m_Cases[t.StartY][t.StartX]->m_Piece;
 		i_Board.m_Cases[t.EndY][t.EndX]->m_Piece->hasMoved = true;
 		i_Board.m_Cases[t.StartY][t.StartX]->m_Piece = nullptr;
 		i_Board.Render(gScreenSurface);
 		SDL_UpdateWindowSurface(gWindow);
-		SDL_Delay(500);
+		if (i_Fast)
+		{
+			SDL_Delay(500);
+		}
+		else
+		{
+			SDL_Delay(0);
+		}
 		i_Turn = !i_Turn;
 	}
 	return gameTurns;
