@@ -44,22 +44,27 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 					i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
 				}
 			}
+			else if (checkRight && i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+			{
+				checkRight = false;
+
+				if (i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
+				}
+			}
 			else if (checkRight && i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece->IsBlack() != IsBlack())
 			{
+				checkRight = false;
+
 				if (!i_Vulnerable)
 				{
 					i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
-					checkRight = false;
 				}
 				else
 				{
 					i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
-					checkRight = false;
 				}
-			}
-			else
-			{
-				checkRight = false;
 			}
 		}
 
@@ -77,6 +82,15 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 					i_Board.m_Cases[i_PosY][i_PosX - x]->SetVulnerability(true);
 				}
 			}
+			else if (checkLeft && i_Board.m_Cases[i_PosY][i_PosX - x]->m_Piece->IsBlack() == IsBlack())
+			{
+				checkLeft = false;
+
+				if(i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY][i_PosX - x]->SetVulnerability(true);
+				}
+			}
 			else if (checkLeft && i_Board.m_Cases[i_PosY][i_PosX - x]->m_Piece->IsBlack() != IsBlack())
 			{
 				if (!i_Vulnerable)
@@ -89,10 +103,6 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 					i_Board.m_Cases[i_PosY][i_PosX - x]->SetVulnerability(true);
 					checkLeft = false;
 				}
-			}
-			else
-			{
-				checkLeft = false;
 			}
 		}
 
@@ -110,6 +120,16 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 					i_Board.m_Cases[i_PosY + x][i_PosX]->SetVulnerability(true);
 				}
 			}
+			else if (checkTop && i_Board.m_Cases[i_PosY + x][i_PosX]->m_Piece->IsBlack() == IsBlack())
+			{
+				checkTop = false;
+
+				if (i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY + x][i_PosX]->SetVulnerability(true);
+				}
+
+			}
 			else if (checkTop && i_Board.m_Cases[i_PosY + x][i_PosX]->m_Piece->IsBlack() != IsBlack())
 			{
 				if (!i_Vulnerable)
@@ -122,10 +142,6 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 					i_Board.m_Cases[i_PosY + x][i_PosX]->SetVulnerability(true);
 					checkTop = false;
 				}
-			}
-			else
-			{
-				checkTop = false;
 			}
 		}
 
@@ -143,6 +159,16 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 					i_Board.m_Cases[i_PosY - x][i_PosX]->SetVulnerability(true);
 				}
 			}
+			else if (checkBottom && i_Board.m_Cases[i_PosY - x][i_PosX]->m_Piece->IsBlack() == IsBlack())
+			{
+				checkBottom = false;
+
+				if (i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY - x][i_PosX]->SetVulnerability(true);
+				}
+
+			}
 			else if (checkBottom && i_Board.m_Cases[i_PosY - x][i_PosX]->m_Piece->IsBlack() != IsBlack())
 			{
 				if (!i_Vulnerable)
@@ -155,10 +181,6 @@ void Tour::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 					i_Board.m_Cases[i_PosY - x][i_PosX]->SetVulnerability(true);
 					checkBottom = false;
 				}
-			}
-			else
-			{
-				checkBottom = false;
 			}
 		}
 	}

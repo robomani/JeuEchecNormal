@@ -86,6 +86,14 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 						i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetVulnerability(true);
 					}
 				}
+				else if (i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece != nullptr
+					|| i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->m_Piece->IsBlack() == IsBlack())
+				{
+					if (i_Vulnerable)
+					{
+						i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetVulnerability(true);
+					}
+				}
 			}
 		}
 
@@ -101,6 +109,14 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 						i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetCaseLight(true);
 					}
 					else
+					{
+						i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetVulnerability(true);
+					}
+				}
+				else if (i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece != nullptr
+					|| i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->m_Piece->IsBlack() == IsBlack())
+				{
+					if (i_Vulnerable)
 					{
 						i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetVulnerability(true);
 					}

@@ -35,7 +35,15 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 			{
 				i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->SetVulnerability(true);
 			}
-		}	
+		}
+		else if (i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->m_Piece != nullptr
+			|| i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->m_Piece->IsBlack() == IsBlack())
+		{
+			if (i_Vulnerable)
+			{
+				i_Board.m_Cases[i_PosY - 2][i_PosX - 1]->SetVulnerability(true);
+			}
+		}
 	}
 
 	if (i_PosX < 7 && i_PosY > 1)
@@ -48,6 +56,14 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 				i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->SetCaseLight(true);
 			}
 			else
+			{
+				i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->SetVulnerability(true);
+			}
+		}
+		else if (i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->m_Piece != nullptr
+			|| i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->m_Piece->IsBlack() == IsBlack())
+		{
+			if (i_Vulnerable)
 			{
 				i_Board.m_Cases[i_PosY - 2][i_PosX + 1]->SetVulnerability(true);
 			}
@@ -68,6 +84,14 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 				i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->SetVulnerability(true);
 			}
 		}
+		else if (i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->m_Piece != nullptr
+			|| i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->m_Piece->IsBlack() == IsBlack())
+		{
+			if (i_Vulnerable)
+			{
+				i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->SetVulnerability(true);
+			}
+		}
 	}
 
 	if (i_PosX < 6 && i_PosY < 7)
@@ -80,6 +104,14 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 				i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->SetCaseLight(true);
 			}
 			else
+			{
+				i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->SetVulnerability(true);
+			}
+		}
+		else if (i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->m_Piece != nullptr
+			|| i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->m_Piece->IsBlack() == IsBlack())
+		{
+			if (i_Vulnerable)
 			{
 				i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->SetVulnerability(true);
 			}
@@ -100,6 +132,14 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 				i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->SetVulnerability(true);
 			}
 		}
+		else if (i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->m_Piece != nullptr
+			|| i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->m_Piece->IsBlack() == IsBlack())
+		{
+			if (i_Vulnerable)
+			{
+				i_Board.m_Cases[i_PosY + 2][i_PosX + 1]->SetVulnerability(true);
+			}
+		}
 	}
 
 	if (i_PosX > 0 && i_PosY < 6)
@@ -112,6 +152,14 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 				i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->SetCaseLight(true);
 			}
 			else
+			{
+				i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->SetVulnerability(true);
+			}
+		}
+		else if (i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->m_Piece != nullptr
+			|| i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->m_Piece->IsBlack() == IsBlack())
+		{
+			if (i_Vulnerable)
 			{
 				i_Board.m_Cases[i_PosY + 2][i_PosX - 1]->SetVulnerability(true);
 			}
@@ -132,6 +180,14 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 				i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->SetVulnerability(true);
 			}
 		}
+		else if (i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->m_Piece != nullptr
+			|| i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->m_Piece->IsBlack() == IsBlack())
+		{
+			if (i_Vulnerable)
+			{
+				i_Board.m_Cases[i_PosY + 1][i_PosX - 2]->SetVulnerability(true);
+			}
+		}
 	}
 
 	if (i_PosX > 1 && i_PosY > 0)
@@ -147,6 +203,14 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 			{
 				i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->SetVulnerability(true);
 			}
+		}
+		else if(i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->m_Piece != nullptr
+			|| i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->m_Piece->IsBlack() == IsBlack())
+		{
+			if(i_Vulnerable)
+			{
+				i_Board.m_Cases[i_PosY - 1][i_PosX - 2]->SetVulnerability(true);
+			} 
 		}
 	}
 }

@@ -44,6 +44,16 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 					i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetVulnerability(true);
 				}
 			}
+			else if (plusXplusY && i_Board.m_Cases[i_PosY + x][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+			{
+				plusXplusY = false;
+
+				if (i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetVulnerability(true);
+				}
+
+			}
 			else if (plusXplusY && i_Board.m_Cases[i_PosY + x][i_PosX + x]->m_Piece->IsBlack() != IsBlack())
 			{
 				if (!i_Vulnerable)
@@ -56,10 +66,6 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 					i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetVulnerability(true);
 					plusXplusY = false;
 				}
-			}
-			else
-			{
-				plusXplusY = false;
 			}
 		}
 
@@ -77,6 +83,15 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 					i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetVulnerability(true);
 				}
 			}
+			else if (plusXminY && i_Board.m_Cases[i_PosY - x][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+			{
+				plusXminY = false;
+
+				if (i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetVulnerability(true);
+				}
+			}
 			else if (plusXminY && i_Board.m_Cases[i_PosY - x][i_PosX + x]->m_Piece->IsBlack() != IsBlack())
 			{
 				if (!i_Vulnerable)
@@ -89,10 +104,6 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 					i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetVulnerability(true);
 					plusXminY = false;
 				}
-			}
-			else
-			{
-				plusXminY = false;
 			}
 		}
 
@@ -110,6 +121,15 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 					i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetVulnerability(true);
 				}
 			}
+			else if (minXplusY && i_Board.m_Cases[i_PosY + x][i_PosX - x]->m_Piece->IsBlack() == IsBlack())
+			{
+				minXplusY = false;
+
+				if (!i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetVulnerability(true);
+				}
+			}
 			else if (minXplusY && i_Board.m_Cases[i_PosY + x][i_PosX - x]->m_Piece->IsBlack() != IsBlack())
 			{
 				if (!i_Vulnerable)
@@ -122,10 +142,6 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 					i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetVulnerability(true);
 					minXplusY = false;
 				}
-			}
-			else
-			{
-				minXplusY = false;
 			}
 		}
 
@@ -143,6 +159,15 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 					i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetVulnerability(true);
 				}
 			}
+			else if (minXminY && i_Board.m_Cases[i_PosY - x][i_PosX - x]->m_Piece->IsBlack() == IsBlack())
+			{
+				minXminY = false;
+
+				if (i_Vulnerable)
+				{
+					i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetVulnerability(true);
+				}
+			}
 			else if (minXminY && i_Board.m_Cases[i_PosY - x][i_PosX - x]->m_Piece->IsBlack() != IsBlack())
 			{
 				if (!i_Vulnerable)
@@ -155,10 +180,6 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 					i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetVulnerability(true);
 					minXminY = false;
 				}
-			}
-			else
-			{
-				minXminY = false;
 			}
 		}
 	}
