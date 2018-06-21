@@ -2,7 +2,7 @@
 #include "BasePieces.h"
 
 
-BaseCase::BaseCase(int i_PosX, int i_PosY, BasePieces* i_Piece)
+BaseCase::BaseCase(int i_PosX, int i_PosY, std::shared_ptr<BasePieces> i_Piece)
 	: PosX (i_PosX)
 	, PosY (i_PosY)
 	, m_Piece (i_Piece)
@@ -13,6 +13,7 @@ BaseCase::BaseCase(int i_PosX, int i_PosY, BasePieces* i_Piece)
 	m_CaseRect.y = PosY * 50;
 	m_CaseRect.w = 50;
 	m_CaseRect.h = 50;
+	SetCaseLight(false);
 }
 
 

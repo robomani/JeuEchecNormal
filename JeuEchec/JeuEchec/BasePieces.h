@@ -4,6 +4,7 @@
 #include <string>
 #include "Vector2.h"
 #include <vector>
+#include <memory>
 
 class Board;
 

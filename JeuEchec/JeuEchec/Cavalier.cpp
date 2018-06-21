@@ -83,9 +83,9 @@ void Cavalier::LightPossibleMoves(const Board& i_Board,const int& i_PosY, const 
 		{
 			if (!i_Vulnerable)
 			{
-				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + 1, i_PosX + 2))
+				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - 1, i_PosX + 2))
 				{
-					i_Board.m_Cases[i_PosY + 1][i_PosX + 2]->SetCaseLight(true);
+					i_Board.m_Cases[i_PosY - 1][i_PosX + 2]->SetCaseLight(true);
 				}
 			}
 			else
