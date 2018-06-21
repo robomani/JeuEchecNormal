@@ -12,6 +12,8 @@ BasePieces::BasePieces(bool i_Black)
 
 BasePieces::~BasePieces()
 {
+	SDL_FreeSurface(m_ImageBase);
+	delete(m_ImageBase);
 }
 
 void BasePieces::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)

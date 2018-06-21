@@ -114,6 +114,9 @@ int main(int argc, char* args[])
 
 		} while (Game());
 	}
+	SDL_FreeSurface(gScreenSurface);
+	delete gScreenSurface;
+	delete gWindow;
 	return 0;
 }
 
@@ -157,14 +160,14 @@ bool Game()
 				if (e.type == SDL_QUIT)
 				{
 					Save(gameTurns, TurnPlayerBlack);
+					SDL_FreeSurface(m_WinScreen);
 					delete m_WinScreen;
-					quit = true;
-					return false;
 				}
 				//Quit en appuillant sur ESC
 				if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				{
 					Save(gameTurns, TurnPlayerBlack);
+					SDL_FreeSurface(m_WinScreen);
 					delete m_WinScreen;
 					quit = true;
 					return false;
@@ -252,7 +255,7 @@ bool Game()
 							{
 								for (int x = 0; x < m_Board.m_Cases[i].size(); x++)
 								{
-									if (m_Board.m_Cases[i][x]->m_Piece != nullptr && m_Board.m_Cases[i][x]->m_Piece->IsBlack() != TurnPlayerBlack)
+									if (m_Board.m_Cases[i][x]->m_Piece != nullptr && m_Board.m_Cases[i][x]->m_Piece->IsBlack() == TurnPlayerBlack)
 									{
 										m_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(m_Board, i, x, true);
 									}
