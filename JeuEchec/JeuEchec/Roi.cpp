@@ -65,6 +65,32 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 									}
 								}
 							}
+							else if (i_PosY == 0)
+							{
+								if (i_Board.m_Cases[i_PosY ][i_PosX + x]->m_Piece == nullptr
+									|| i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece->IsBlack() != IsBlack())
+								{
+									if (!i_Vulnerable)
+									{
+										if (!i_Board.m_Cases[i_PosY][i_PosX + x]->isVulnerable)
+										{
+											i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+										}
+									}
+									else
+									{
+										i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
+									}
+								}
+								else if (i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
+									{
+										i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
+									}
+								}
+							}
 						}
 						else if (y > 0)
 						{
@@ -91,6 +117,94 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 									if (i_Vulnerable)
 									{
 										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
+									}
+								}
+							}
+						}
+					}
+					else if (i_PosX == 0)
+					{
+						//Prevent look outside the Grid in Y axis.
+						if (y <= 0)
+						{
+							if (i_PosY > 0)
+							{
+								if (i_Board.m_Cases[i_PosY + y][i_PosX]->m_Piece == nullptr
+									|| i_Board.m_Cases[i_PosY + y][i_PosX]->m_Piece->IsBlack() != IsBlack())
+								{
+									if (!i_Vulnerable)
+									{
+										if (!i_Board.m_Cases[i_PosY + y][i_PosX]->isVulnerable)
+										{
+											i_Board.m_Cases[i_PosY + y][i_PosX]->SetCaseLight(true);
+										}
+									}
+									else
+									{
+										i_Board.m_Cases[i_PosY + y][i_PosX]->SetVulnerability(true);
+									}
+								}
+								else if (i_Board.m_Cases[i_PosY + y][i_PosX]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY + y][i_PosX]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
+									{
+										i_Board.m_Cases[i_PosY + y][i_PosX]->SetVulnerability(true);
+									}
+								}
+							}
+							else if (i_PosY == 0)
+							{
+								if (i_Board.m_Cases[i_PosY][i_PosX]->m_Piece == nullptr
+									|| i_Board.m_Cases[i_PosY][i_PosX]->m_Piece->IsBlack() != IsBlack())
+								{
+									if (!i_Vulnerable)
+									{
+										if (!i_Board.m_Cases[i_PosY][i_PosX]->isVulnerable)
+										{
+											i_Board.m_Cases[i_PosY][i_PosX]->SetCaseLight(true);
+										}
+									}
+									else
+									{
+										i_Board.m_Cases[i_PosY][i_PosX]->SetVulnerability(true);
+									}
+								}
+								else if (i_Board.m_Cases[i_PosY][i_PosX]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY][i_PosX]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
+									{
+										i_Board.m_Cases[i_PosY][i_PosX]->SetVulnerability(true);
+									}
+								}
+							}
+						}
+						else if (y > 0)
+						{
+							if (i_PosY < 7)
+							{
+								if (i_Board.m_Cases[i_PosY + y][i_PosX]->m_Piece == nullptr
+									|| i_Board.m_Cases[i_PosY + y][i_PosX]->m_Piece->IsBlack() != IsBlack())
+								{
+									if (!i_Vulnerable)
+									{
+										if (!i_Board.m_Cases[i_PosY + y][i_PosX]->isVulnerable)
+										{
+											i_Board.m_Cases[i_PosY + y][i_PosX]->SetCaseLight(true);
+										}
+									}
+									else
+									{
+										i_Board.m_Cases[i_PosY + y][i_PosX]->SetVulnerability(true);
+									}
+								}
+								else if (i_Board.m_Cases[i_PosY + y][i_PosX]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY + y][i_PosX]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
+									{
+										i_Board.m_Cases[i_PosY + y][i_PosX]->SetVulnerability(true);
 									}
 								}
 							}
@@ -128,6 +242,32 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 									if (i_Vulnerable)
 									{
 										i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetVulnerability(true);
+									}
+								}
+							}
+							else if (i_PosY == 0)
+							{
+								if (i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece == nullptr
+									|| i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece->IsBlack() != IsBlack())
+								{
+									if (!i_Vulnerable)
+									{
+										if (!i_Board.m_Cases[i_PosY][i_PosX + x]->isVulnerable)
+										{
+											i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+										}
+									}
+									else
+									{
+										i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
+									}
+								}
+								else if (i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece != nullptr
+									&& i_Board.m_Cases[i_PosY][i_PosX + x]->m_Piece->IsBlack() == IsBlack())
+								{
+									if (i_Vulnerable)
+									{
+										i_Board.m_Cases[i_PosY][i_PosX + x]->SetVulnerability(true);
 									}
 								}
 							}
