@@ -15,7 +15,7 @@ public:
 
 	bool hasMoved = false;
 	bool Selected;
-
+	bool isKing = false;
 
 	virtual void LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable);
 	virtual void Mouvement();

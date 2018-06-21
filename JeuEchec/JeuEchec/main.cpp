@@ -34,7 +34,7 @@ SDL_Surface* gScreenSurface = NULL;
 void Save(const std::vector<Turn>& iGameTurns, const bool i_Turn);
 std::vector<Turn> Load(Board& i_Board, bool& i_Turn);
 void ChangeTurn(const float& i_TimePlayerWhite, const float& i_TimePlayerBlack, bool& i_PlayerTurn);
-
+bool Game();
 
 bool init()
 {
@@ -103,26 +103,39 @@ SDL_Surface* loadSurface(std::string path)
 
 int main(int argc, char* args[])
 {
-	float timePlayerWhite = 0;
-	float timePlayerBlack = 0;
-	bool TurnPlayerBlack = false;
-	Board m_Board = Board();
-	BaseCase* selectedPiece = nullptr;
-	std::vector<Turn> gameTurns;
-	Turn currentTurn;
-	clock_t startTime = clock(); //Start timer
-	
-	//std::vector<Vector2> ValidMove; 
-
-	
-
-	//Start up SDL and create window
 	if (!init())
 	{
 		printf("Failed to initialize!\n");
 	}
 	else
 	{
+		do
+		{
+
+		} while (Game());
+	}
+	return 0;
+}
+
+bool Game()
+{
+	float timePlayerWhite = 0;
+	float timePlayerBlack = 0;
+	bool TurnPlayerBlack = false;
+	bool gameEnded = false;
+	Board m_Board = Board();
+	BaseCase* selectedPiece = nullptr;
+	std::vector<Turn> gameTurns;
+	Turn currentTurn;
+	clock_t startTime = clock(); //Start timer
+	SDL_Surface* m_WinScreen = nullptr;
+
+	//std::vector<Vector2> ValidMove; 
+
+
+
+	//Start up SDL and create window
+	
 		gameTurns = Load(m_Board, TurnPlayerBlack);
 
 		//Main loop flag
@@ -144,13 +157,30 @@ int main(int argc, char* args[])
 				if (e.type == SDL_QUIT)
 				{
 					Save(gameTurns, TurnPlayerBlack);
+					delete selectedPiece;
+					delete m_WinScreen;
 					quit = true;
+					return false;
 				}
-				if (e.type == SDL_KEYDOWN)
+				//Quit en appuillant sur ESC
+				if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				{
 					Save(gameTurns, TurnPlayerBlack);
 					delete selectedPiece;
+					delete m_WinScreen;
 					quit = true;
+					return false;
+				}
+				//Restart en apuillant sur R
+				if (e.key.keysym.scancode == SDL_SCANCODE_R)
+				{
+					std::ofstream myfile;
+					myfile.open("save.txt", std::ofstream::out | std::ofstream::trunc);
+					myfile.close();
+					delete selectedPiece;
+					delete m_WinScreen;
+					return true;
+
 				}
 				if (e.type == SDL_MOUSEBUTTONDOWN)
 				{
@@ -172,8 +202,8 @@ int main(int argc, char* args[])
 					{
 						if (mousePosY >= 400 || mousePosX >= 400)
 						{
-							
-					
+
+
 						}
 						if (m_Board.m_Cases[floor(mousePosY / 50)][floor(mousePosX / 50)]->isAlight)
 						{
@@ -183,6 +213,18 @@ int main(int argc, char* args[])
 							currentTurn.EndY = floor(mousePosY / 50);
 							if (m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece)
 							{
+								if (m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece->isKing)
+								{
+									if (TurnPlayerBlack)
+									{
+										m_WinScreen = IMG_Load("ArtWork/PlayerBlackWin.png");
+									}
+									else
+									{
+										m_WinScreen = IMG_Load("ArtWork/PlayerWhiteWin.png");
+									}
+									gameEnded = true;
+								}
 								delete m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece;
 							}
 							m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece = selectedPiece->m_Piece;
@@ -243,7 +285,7 @@ int main(int argc, char* args[])
 				}
 
 
-				
+
 				if (!TurnPlayerBlack)
 				{
 					timePlayerWhite = (clock() - startTime) / 1000;
@@ -252,7 +294,7 @@ int main(int argc, char* args[])
 				{
 					timePlayerBlack = (clock() - startTime) / 1000;
 				}
-				
+
 			}
 
 			//Show mouse position X and Y
@@ -261,34 +303,36 @@ int main(int argc, char* args[])
 			if (isButtonDown)
 			{
 				//std::cout << "True" << std::endl;
-				if (mousePosY < 400-25 && mousePosX < 400-25 && selectedPiece != nullptr)
+				if (mousePosY < 400 - 25 && mousePosX < 400 - 25 && selectedPiece != nullptr)
 				{
-					selectedPiece->m_CaseRect.x = mousePosX -25;
-					selectedPiece->m_CaseRect.y = mousePosY -25;
+					selectedPiece->m_CaseRect.x = mousePosX - 25;
+					selectedPiece->m_CaseRect.y = mousePosY - 25;
 				}
-				
+
+			}
+
+			if (!gameEnded)
+			{
+				m_Board.Render(gScreenSurface);
+				if (selectedPiece != nullptr)
+				{
+					m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
+				}
 			}
 			else
 			{
-				
-			}
-			//Apply the PNG image
-			m_Board.Render(gScreenSurface);
-			if (selectedPiece != nullptr)
-			{
+				SDL_BlitSurface(m_WinScreen, NULL, gScreenSurface, NULL);
 				m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
 				std::cout << "Render";
 			}
-
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
 		}
-	}
+	
 	//Free resources and close SDL
 	close();
-
-	return 0;
 }
+
 
 void ChangeTurn(const float& i_TimePlayerWhite,const float& i_TimePlayerBlack, bool& i_PlayerTurn)
 {
@@ -302,7 +346,7 @@ void ChangeTurn(const float& i_TimePlayerWhite,const float& i_TimePlayerBlack, b
 void Save(const std::vector<Turn>& iGameTurns ,const bool i_Turn)
 {
 	std::ofstream myfile;
-	myfile.open("save.txt");
+	myfile.open("save.txt", std::ofstream::out | std::ofstream::trunc);
 	for each (Turn thisTurn in iGameTurns)
 	{
 		if (thisTurn.EndY != NULL)
@@ -352,6 +396,9 @@ std::vector<Turn> Load(Board& i_Board, bool& i_Turn)
 			}	
 		}
 		myfile.close();
+
+		myfile.open("save.txt", std::ofstream::out | std::ofstream::trunc);
+		myfile.close();
 		
 	}
 	
@@ -366,7 +413,7 @@ std::vector<Turn> Load(Board& i_Board, bool& i_Turn)
 		i_Board.m_Cases[t.StartY][t.StartX]->m_Piece = nullptr;
 		i_Board.Render(gScreenSurface);
 		SDL_UpdateWindowSurface(gWindow);
-		SDL_Delay(1000);
+		SDL_Delay(500);
 		i_Turn = !i_Turn;
 	}
 	return gameTurns;

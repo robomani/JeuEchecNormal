@@ -5,6 +5,7 @@
 Roi::Roi(bool i_Black)
 	: BasePieces(i_Black)
 {
+	isKing = true;
 	if (i_Black)
 	{
 		m_ImageBase = loadSurface("ArtWork/Black_King.png");
