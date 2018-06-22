@@ -1,7 +1,6 @@
 #include "BasePieces.h"
 #include "Board.h"
 #include "Roi.h"
-#include <iostream>
 #include <math.h>
 
 
@@ -39,7 +38,6 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 	{
 		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
 		{
-<<<<<<< HEAD
 			i_Board.m_Cases[i][x]->isVulnerable = false;
 		}
 	}
@@ -50,12 +48,6 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 		{
 			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
 			{
-				
-=======
-			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
-			{
-				i_Board.m_Cases[i][x]->isVulnerable = false;	
->>>>>>> f7b88ac98084c9792f39f6fd669de96a7e59c82a
 				i_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(i_Board, i, x, true);
 			}
 		}
@@ -69,11 +61,7 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 			{
 				if (i_Board.m_Cases[i][x]->m_Piece->IsBlack() == IsBlack())
 				{
-					std::cout << i_Board.m_Cases[i][x]->m_Piece->IsBlack() << " : Roi  " << std::endl;
-					std::cout << IsBlack() << " : Moi" << std::endl;
-
 					isKingVulnerable = i_Board.m_Cases[i][x]->isVulnerable;
-					std::cout << i_Board.m_Cases[i][x]->isVulnerable << std::endl;
 				}
 			}
 		}
@@ -88,7 +76,6 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 	{
 		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
 		{
-<<<<<<< HEAD
 			i_Board.m_Cases[i][x]->isVulnerable = false;
 		}
 	}
@@ -97,15 +84,9 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 	{
 		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
 		{
-			
 			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
 			{
 
-=======
-			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
-			{
-				i_Board.m_Cases[i][x]->isVulnerable = false;
->>>>>>> f7b88ac98084c9792f39f6fd669de96a7e59c82a
 				i_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(i_Board, i, x, true);
 			}
 		}

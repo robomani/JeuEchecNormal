@@ -169,7 +169,7 @@ bool Game()
 				{
 					Save(gameTurns, TurnPlayerBlack);
 					SDL_FreeSurface(m_WinScreen);
-					delete m_WinScreen;
+					m_WinScreen = nullptr;
 					quit = true;
 					return false;
 				}
@@ -179,7 +179,7 @@ bool Game()
 					std::ofstream myfile;
 					myfile.open("save.txt", std::ofstream::out | std::ofstream::trunc);
 					myfile.close();
-					delete m_WinScreen;
+					m_WinScreen = nullptr;
 					return true;
 
 				}
