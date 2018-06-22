@@ -21,7 +21,7 @@ BaseCase::BaseCase(int i_PosX, int i_PosY, std::shared_ptr<BasePieces> i_Piece)
 BaseCase::~BaseCase()
 {
 	SDL_FreeSurface(m_ImageLight);
-	delete(m_ImageLight);
+	m_ImageLight = nullptr;
 }
 
 void BaseCase::SetCaseLight(bool i_toLight, Board& i_board)

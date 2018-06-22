@@ -13,7 +13,7 @@ BasePieces::BasePieces(bool i_Black)
 BasePieces::~BasePieces()
 {
 	SDL_FreeSurface(m_ImageBase);
-	delete(m_ImageBase);
+	m_ImageBase = nullptr;
 }
 
 void BasePieces::LightPossibleMoves(Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
@@ -34,7 +34,13 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 	i_Board.m_Cases[i_PosY][i_PosX]->m_Piece = i_Board.m_Cases[i_PreviousPosY][i_PreviousPosX]->m_Piece;
 	i_Board.m_Cases[i_PreviousPosY][i_PreviousPosX]->m_Piece = nullptr;
 
-
+	for (int i = 0; i < i_Board.m_Cases.size(); i++)
+	{
+		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
+		{
+			i_Board.m_Cases[i][x]->isVulnerable = false;
+		}
+	}
 
 	for (int i = 0; i < i_Board.m_Cases.size(); i++)
 	{
@@ -42,7 +48,7 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 		{
 			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
 			{
-				i_Board.m_Cases[i][x]->isVulnerable = false;
+				
 				i_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(i_Board, i, x, true);
 			}
 		}
@@ -62,8 +68,19 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 		}
 	}
 
+	
+
 	i_Board.m_Cases[i_PreviousPosY][i_PreviousPosX]->m_Piece = i_Board.m_Cases[i_PosY][i_PosX]->m_Piece;
 	i_Board.m_Cases[i_PosY][i_PosX]->m_Piece = previousPiece;
+
+	for (int i = 0; i < i_Board.m_Cases.size(); i++)
+	{
+		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
+		{
+			i_Board.m_Cases[i][x]->isVulnerable = false;
+		}
+	}
+
 	for (int i = 0; i < i_Board.m_Cases.size(); i++)
 	{
 		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
@@ -71,7 +88,7 @@ bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY
 			
 			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
 			{
-				i_Board.m_Cases[i][x]->isVulnerable = false;
+
 				i_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(i_Board, i, x, true);
 			}
 		}

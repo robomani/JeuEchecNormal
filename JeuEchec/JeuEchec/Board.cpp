@@ -19,7 +19,7 @@ Board::Board()
 Board::~Board()
 {
 	SDL_FreeSurface(m_BoardSurface);
-	delete(m_BoardSurface);
+	m_BoardSurface = nullptr;
 }
 
 
