@@ -162,7 +162,7 @@ bool Game()
 				{
 					Save(gameTurns, TurnPlayerBlack);
 					SDL_FreeSurface(m_WinScreen);
-					delete m_WinScreen;
+					m_WinScreen = nullptr;
 				}
 				//Quit en appuillant sur ESC
 				if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
@@ -248,7 +248,7 @@ bool Game()
 								}
 
 							}
-
+							m_Board.canMove = false;
 							for (int i = 0; i < m_Board.m_Cases.size(); i++)
 							{
 								for (int x = 0; x < m_Board.m_Cases[i].size(); x++)
@@ -275,7 +275,7 @@ bool Game()
 							{
 								if (m_Check)
 								{
-									if (TurnPlayerBlack)
+									if (!TurnPlayerBlack)
 									{
 										m_WinScreen = IMG_Load("ArtWork/PlayerBlackWin.png");
 									}
@@ -358,8 +358,8 @@ bool Game()
 			else
 			{
 				SDL_BlitSurface(m_WinScreen, NULL, gScreenSurface, NULL);
-				m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
-				std::cout << "Render";
+				//m_Board.m_Cases[selectedPiece->PosY][selectedPiece->PosX]->Render(gScreenSurface);
+				//std::cout << "Render";
 			}
 			//Update the surface
 			SDL_UpdateWindowSurface(gWindow);
