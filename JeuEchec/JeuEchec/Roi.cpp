@@ -22,7 +22,7 @@ Roi::~Roi()
 }
 
 
-void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable)
+void Roi::LightPossibleMoves(Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable)
 {
 	//Loop in a -1 -> 1 range in X and Y around the pawn.
 	for (int x = -1; x < 2; x++)
@@ -49,7 +49,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 									{
 										if (!i_Board.m_Cases[i_PosY + y][i_PosX + x]->isVulnerable)
 										{
-											i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetCaseLight(true);
+											i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetCaseLight(true, i_Board);
 										}
 									}
 									else
@@ -75,7 +75,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 									{
 										if (!i_Board.m_Cases[i_PosY][i_PosX + x]->isVulnerable)
 										{
-											i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+											i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true, i_Board);
 										}
 									}
 									else
@@ -104,7 +104,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 									{
 										if (!i_Board.m_Cases[i_PosY + y][i_PosX + x]->isVulnerable)
 										{
-											i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetCaseLight(true);
+											i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetCaseLight(true, i_Board);
 										}
 									}
 									else
@@ -139,7 +139,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										{
 											if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + y, i_PosX))
 											{
-												i_Board.m_Cases[i_PosY + y][i_PosX]->SetCaseLight(true);
+												i_Board.m_Cases[i_PosY + y][i_PosX]->SetCaseLight(true, i_Board);
 											}
 										}
 									}
@@ -168,9 +168,9 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										{
 											if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX))
 											{
-												i_Board.m_Cases[i_PosY][i_PosX]->SetCaseLight(true);
+												i_Board.m_Cases[i_PosY][i_PosX]->SetCaseLight(true, i_Board);
 											}
-											i_Board.m_Cases[i_PosY][i_PosX]->SetCaseLight(true);
+											i_Board.m_Cases[i_PosY][i_PosX]->SetCaseLight(true, i_Board);
 										}
 									}
 									else
@@ -201,7 +201,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										{
 											if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + y, i_PosX))
 											{
-												i_Board.m_Cases[i_PosY + y][i_PosX]->SetCaseLight(true);
+												i_Board.m_Cases[i_PosY + y][i_PosX]->SetCaseLight(true, i_Board);
 											}
 										}
 									}
@@ -241,7 +241,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										{
 											if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + y, i_PosX + x))
 											{
-												i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetCaseLight(true);
+												i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetCaseLight(true, i_Board);
 											}
 										}
 									}
@@ -270,7 +270,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										{
 											if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX + x))
 											{
-												i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+												i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true, i_Board);
 											}
 										}
 									}
@@ -302,7 +302,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 										{
 											if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + y, i_PosX + x))
 											{
-												i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetCaseLight(true);
+												i_Board.m_Cases[i_PosY + y][i_PosX + x]->SetCaseLight(true, i_Board);
 											}
 										}
 									}
@@ -328,7 +328,7 @@ void Roi::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 	}
 }
 
-bool Roi::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+bool Roi::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
 {
 	return BasePieces::IsKingVulnerableAtPos(i_Board, i_PreviousPosY, i_PreviousPosX, i_PosY, i_PosX);
 }

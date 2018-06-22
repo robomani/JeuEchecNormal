@@ -20,7 +20,7 @@ Fou::~Fou()
 {
 }
 
-void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable)
+void Fou::LightPossibleMoves(Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable)
 {
 	//Bool that turn off when something is found by a for loop to stop looking in that direction.
 	bool plusXplusY = true;
@@ -39,7 +39,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -63,7 +63,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 					plusXplusY = false;
 				}
@@ -84,7 +84,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -107,7 +107,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true);		
+						i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 					plusXminY = false;
 				}
@@ -128,7 +128,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -151,7 +151,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 					minXplusY = false;
 				}
@@ -172,7 +172,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -195,7 +195,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 					minXminY = false;
 				}
@@ -209,7 +209,7 @@ void Fou::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int&
 	}
 }
 
-bool Fou::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+bool Fou::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
 {
 	return BasePieces::IsKingVulnerableAtPos(i_Board, i_PreviousPosY, i_PreviousPosX, i_PosY, i_PosX);
 }

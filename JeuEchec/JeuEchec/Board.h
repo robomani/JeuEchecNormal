@@ -11,6 +11,7 @@
 class Board
 {
 	SDL_Surface* m_BoardSurface = nullptr;
+	
 
 public:
 	Board();
@@ -18,6 +19,7 @@ public:
 
 	int m_Height;
 	int m_Width;
+	bool canMove;
 
 	std::vector<std::vector<std::shared_ptr<BaseCase>>> m_Cases;
 	//BasePieces* m_PiecesInGame[2][16];

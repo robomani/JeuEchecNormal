@@ -20,7 +20,7 @@ Dame::~Dame()
 {
 }
 
-void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable)
+void Dame::LightPossibleMoves(Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable)
 {
 	//Check For Fou Like Movements
 	//Bool that turn off when something is found by a for loop to stop looking in that direction.
@@ -40,7 +40,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -64,7 +64,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 					plusXplusY = false;
 				}
@@ -85,7 +85,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -108,7 +108,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 					plusXminY = false;
 				}
@@ -129,7 +129,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -152,7 +152,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 					minXplusY = false;
 				}
@@ -173,7 +173,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -196,7 +196,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 					minXminY = false;
 				}
@@ -226,7 +226,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -251,7 +251,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX + x))
 					{
-						i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY][i_PosX + x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -270,7 +270,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -293,7 +293,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY, i_PosX - x))
 					{
-						i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY][i_PosX - x]->SetCaseLight(true, i_Board);
 					}
 					checkLeft = false;
 				}
@@ -314,7 +314,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -338,7 +338,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + x, i_PosX))
 					{
-						i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY + x][i_PosX]->SetCaseLight(true, i_Board);
 					}
 					checkTop = false;
 				}
@@ -359,7 +359,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true, i_Board);
 					}
 				}
 				else
@@ -383,7 +383,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 				{
 					if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY - x, i_PosX))
 					{
-						i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true);
+						i_Board.m_Cases[i_PosY - x][i_PosX]->SetCaseLight(true, i_Board);
 					}
 					checkBottom = false;
 				}
@@ -397,7 +397,7 @@ void Dame::LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int
 	}
 }
 
-bool Dame::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+bool Dame::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
 {
 	return BasePieces::IsKingVulnerableAtPos(i_Board, i_PreviousPosY, i_PreviousPosX, i_PosY, i_PosX);
 }

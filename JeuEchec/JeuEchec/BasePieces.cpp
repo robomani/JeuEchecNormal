@@ -16,12 +16,12 @@ BasePieces::~BasePieces()
 	delete(m_ImageBase);
 }
 
-void BasePieces::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
+void BasePieces::LightPossibleMoves(Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
 {
 
 }
 
-bool BasePieces::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+bool BasePieces::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
 {
 	bool isKingVulnerable = false;
 	std::shared_ptr<BasePieces> previousPiece = nullptr;
@@ -40,9 +40,9 @@ bool BasePieces::IsKingVulnerableAtPos(const Board& i_Board, const int& i_Previo
 	{
 		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
 		{
-			i_Board.m_Cases[i][x]->isVulnerable = false;
 			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
 			{
+				i_Board.m_Cases[i][x]->isVulnerable = false;
 				i_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(i_Board, i, x, true);
 			}
 		}
@@ -68,9 +68,10 @@ bool BasePieces::IsKingVulnerableAtPos(const Board& i_Board, const int& i_Previo
 	{
 		for (int x = 0; x < i_Board.m_Cases[i].size(); x++)
 		{
-			i_Board.m_Cases[i][x]->isVulnerable = false;
+			
 			if (i_Board.m_Cases[i][x]->m_Piece != nullptr && i_Board.m_Cases[i][x]->m_Piece->IsBlack() != IsBlack())
 			{
+				i_Board.m_Cases[i][x]->isVulnerable = false;
 				i_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(i_Board, i, x, true);
 			}
 		}

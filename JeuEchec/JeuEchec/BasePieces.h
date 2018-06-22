@@ -17,9 +17,10 @@ public:
 	bool hasMoved = false;
 	bool Selected;
 	bool isKing = false;
+	bool check = false;
 
-	virtual void LightPossibleMoves(const Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable);
-	virtual bool IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX);
+	virtual void LightPossibleMoves(Board& i_Board, const int& i_PosY, const int& i_PosX, const bool i_Vulnerable);
+	virtual bool IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX);
 	virtual void Mouvement();
 	virtual void Destroy();
 	void Render(SDL_Surface* gScreenSurface, SDL_Rect* a_CaseRect);

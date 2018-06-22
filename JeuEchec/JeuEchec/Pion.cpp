@@ -33,7 +33,7 @@ void Pion::Mouvement()
 {
 }
 
-void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
+void Pion::LightPossibleMoves(Board& i_Board,const int& i_PosY,const int& i_PosX, const bool i_Vulnerable)
 {
 	int directionY = 1;
 
@@ -51,7 +51,7 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 			{
 				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + directionY, i_PosX))
 				{
-					i_Board.m_Cases[i_PosY + directionY][i_PosX]->SetCaseLight(true);
+					i_Board.m_Cases[i_PosY + directionY][i_PosX]->SetCaseLight(true, i_Board);
 				}
 			}
 		}
@@ -66,7 +66,7 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 			{
 				if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + directionY + directionY, i_PosX))
 				{
-					i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->SetCaseLight(true);
+					i_Board.m_Cases[i_PosY + directionY + directionY][i_PosX]->SetCaseLight(true, i_Board);
 				}
 			}
 		}
@@ -87,7 +87,7 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 					{
 						if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + directionY, i_PosX + 1))
 						{
-							i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetCaseLight(true);
+							i_Board.m_Cases[i_PosY + directionY][i_PosX + 1]->SetCaseLight(true, i_Board);
 						}
 					}
 					else
@@ -117,7 +117,7 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 					{
 						if (!IsKingVulnerableAtPos(i_Board, i_PosY, i_PosX, i_PosY + directionY, i_PosX - 1))
 						{
-							i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetCaseLight(true);
+							i_Board.m_Cases[i_PosY + directionY][i_PosX - 1]->SetCaseLight(true, i_Board);
 						}
 					}
 					else
@@ -138,7 +138,7 @@ void Pion::LightPossibleMoves(const Board& i_Board,const int& i_PosY,const int& 
 	}
 }
 
-bool Pion::IsKingVulnerableAtPos(const Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
+bool Pion::IsKingVulnerableAtPos(Board& i_Board, const int& i_PreviousPosY, const int& i_PreviousPosX, const int& i_PosY, const int& i_PosX)
 {
 	return BasePieces::IsKingVulnerableAtPos(i_Board, i_PreviousPosY, i_PreviousPosX, i_PosY, i_PosX);
 }

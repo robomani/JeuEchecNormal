@@ -1,5 +1,6 @@
 #include "BaseCase.h"
 #include "BasePieces.h"
+#include "Board.h"
 
 
 BaseCase::BaseCase(int i_PosX, int i_PosY, std::shared_ptr<BasePieces> i_Piece)
@@ -13,7 +14,7 @@ BaseCase::BaseCase(int i_PosX, int i_PosY, std::shared_ptr<BasePieces> i_Piece)
 	m_CaseRect.y = PosY * 50;
 	m_CaseRect.w = 50;
 	m_CaseRect.h = 50;
-	SetCaseLight(false);
+	isAlight = false;
 }
 
 
@@ -23,9 +24,13 @@ BaseCase::~BaseCase()
 	delete(m_ImageLight);
 }
 
-void BaseCase::SetCaseLight(bool i_toLight)
+void BaseCase::SetCaseLight(bool i_toLight, Board& i_board)
 {
 	isAlight = i_toLight;
+	if (i_toLight == true)
+	{
+		i_board.canMove = true;
+	}
 }
 
 void BaseCase::SetVulnerability(bool i_Vulnerability)

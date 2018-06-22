@@ -25,7 +25,7 @@ public:
 	SDL_Surface* loadSurface(std::string path);
 
 	//La bool determine si l'on veut que la case soit illuminer
-	void SetCaseLight(bool i_toLight);
+	void SetCaseLight(bool i_toLight, Board& i_board);
 	void SetVulnerability(bool i_Vulnerability);
 	void Render(SDL_Surface* gScreenSurface);
 };

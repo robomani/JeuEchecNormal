@@ -126,6 +126,7 @@ bool Game()
 	float timePlayerBlack = 0;
 	bool TurnPlayerBlack = false;
 	bool gameEnded = false;
+	bool m_Check = false;
 	Board m_Board = Board();
 	std::shared_ptr<BaseCase> selectedPiece = nullptr;
 	std::vector<Turn> gameTurns;
@@ -219,21 +220,6 @@ bool Game()
 							selectedPiece->PosX = floor(mousePosX / 50);
 							currentTurn.EndX = floor(mousePosX / 50);
 							currentTurn.EndY = floor(mousePosY / 50);
-							if (m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece)
-							{
-								if (m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece->isKing)
-								{
-									if (TurnPlayerBlack)
-									{
-										m_WinScreen = IMG_Load("ArtWork/PlayerBlackWin.png");
-									}
-									else
-									{
-										m_WinScreen = IMG_Load("ArtWork/PlayerWhiteWin.png");
-									}
-									gameEnded = true;
-								}								
-							}
 							m_Board.m_Cases[currentTurn.EndY][currentTurn.EndX]->m_Piece = selectedPiece->m_Piece;
 							selectedPiece->m_Piece->hasMoved = true;
 							m_Board.m_Cases[currentTurn.StartY][currentTurn.StartX]->m_Piece = nullptr;
@@ -262,6 +248,49 @@ bool Game()
 								}
 
 							}
+
+							for (int i = 0; i < m_Board.m_Cases.size(); i++)
+							{
+								for (int x = 0; x < m_Board.m_Cases[i].size(); x++)
+								{
+									if (m_Board.m_Cases[i][x]->m_Piece != nullptr && m_Board.m_Cases[i][x]->m_Piece->IsBlack() == TurnPlayerBlack)
+									{
+										m_Board.m_Cases[i][x]->m_Piece->LightPossibleMoves(m_Board, i, x, false);
+										if (m_Board.m_Cases[i][x]->m_Piece->isKing && m_Board.m_Cases[i][x]->isVulnerable)
+										{
+											m_Check = true;
+										}
+										if (m_Board.canMove)
+										{
+											break;
+										}
+									}
+								}
+								if (m_Board.canMove)
+								{
+									break;
+								}
+							}
+							if (!m_Board.canMove)
+							{
+								if (m_Check)
+								{
+									if (TurnPlayerBlack)
+									{
+										m_WinScreen = IMG_Load("ArtWork/PlayerBlackWin.png");
+									}
+									else
+									{
+										m_WinScreen = IMG_Load("ArtWork/PlayerWhiteWin.png");
+									}								
+								}
+								else
+								{
+									m_WinScreen = IMG_Load("ArtWork/Tie.png");
+								}
+								gameEnded = true;
+							}
+
 						}
 						else
 						{
@@ -275,7 +304,7 @@ bool Game()
 						{
 							for (int x = 0; x < m_Board.m_Cases[i].size(); x++)
 							{
-								m_Board.m_Cases[i][x]->SetCaseLight(false);
+								m_Board.m_Cases[i][x]->SetCaseLight(false, m_Board);
 							}
 						}
 					}
